@@ -500,8 +500,8 @@
         }
         .intro-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
         .intro-overlay .intro-logo { margin-bottom: 16px; animation: float 3s ease infinite; }
-        .cover-svg { width: 200px; height: auto; display: block; margin: 0 auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.20)); }
-        .hero .hero-logo .cover-svg { width: 175px; }
+        .cover-photo { width: 440px; max-width: 84%; height: auto; display: block; margin: 0 auto; border-radius: 18px; border: 4px solid rgba(255,255,255,0.9); box-shadow: 0 16px 40px rgba(0,0,0,0.30); }
+        .hero .hero-logo .cover-photo { width: 380px; }
         .intro-overlay h1 { font-family: 'Montserrat', sans-serif; font-size: 4em; color: var(--white); font-weight: 800; margin-bottom: 14px; text-align: center; }
         .intro-overlay p { color: rgba(255,255,255,0.85); font-size: 1.3em; margin-bottom: 40px; text-align: center; padding: 0 20px; }
         .start-btn {
@@ -532,49 +532,7 @@
 <!-- ===================== INTRO OVERLAY ===================== -->
 <div class="intro-overlay" id="introOverlay">
     <div class="intro-logo">
-        <svg class="cover-svg" viewBox="0 0 240 182" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vaca lechera y fábrica de lácteos">
-            <ellipse cx="120" cy="168" rx="112" ry="14" fill="#7BC143"/>
-            <g opacity="0.96">
-                <rect x="206" y="92" width="7" height="30" rx="2" fill="#F9A825"/>
-                <circle cx="209" cy="86" r="4.5" fill="#fff" opacity="0.9"/>
-                <circle cx="216" cy="79" r="3" fill="#fff" opacity="0.7"/>
-                <path d="M180 122 L180 106 L192 122 L192 106 L204 122 L204 106 L216 122 Z" fill="#FDEBD0"/>
-                <rect x="180" y="122" width="36" height="34" rx="3" fill="#FFF3E3"/>
-                <rect x="186" y="130" width="9" height="9" rx="1.5" fill="#D4F1F9"/>
-                <rect x="201" y="130" width="9" height="9" rx="1.5" fill="#D4F1F9"/>
-            </g>
-            <g fill="#ffffff">
-                <rect x="96" y="118" width="11" height="38" rx="3"/>
-                <rect x="113" y="120" width="11" height="36" rx="3"/>
-                <rect x="146" y="120" width="11" height="36" rx="3"/>
-                <rect x="161" y="118" width="11" height="38" rx="3"/>
-            </g>
-            <g fill="#333333">
-                <rect x="96" y="150" width="11" height="7" rx="2"/>
-                <rect x="113" y="150" width="11" height="7" rx="2"/>
-                <rect x="146" y="150" width="11" height="7" rx="2"/>
-                <rect x="161" y="150" width="11" height="7" rx="2"/>
-            </g>
-            <ellipse cx="133" cy="128" rx="13" ry="10" fill="#F6BFCB"/>
-            <circle cx="128" cy="137" r="2.2" fill="#E59BAC"/>
-            <circle cx="138" cy="137" r="2.2" fill="#E59BAC"/>
-            <path d="M174 92 q15 8 11 28 q-1 7 -6 11" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="178" cy="132" r="5" fill="#333333"/>
-            <ellipse cx="123" cy="100" rx="56" ry="33" fill="#ffffff"/>
-            <ellipse cx="105" cy="90" rx="17" ry="13" fill="#2f2f2f" transform="rotate(-12 105 90)"/>
-            <ellipse cx="151" cy="107" rx="15" ry="12" fill="#2f2f2f" transform="rotate(8 151 107)"/>
-            <ellipse cx="162" cy="86" rx="9" ry="7" fill="#2f2f2f"/>
-            <ellipse cx="58" cy="93" rx="26" ry="21" fill="#ffffff"/>
-            <ellipse cx="75" cy="75" rx="9" ry="6" fill="#ffffff" transform="rotate(30 75 75)"/>
-            <ellipse cx="74" cy="76" rx="4.5" ry="3" fill="#F6BFCB" transform="rotate(30 74 76)"/>
-            <path d="M50 71 q-3 -11 5 -14" fill="none" stroke="#E8C98F" stroke-width="4.5" stroke-linecap="round"/>
-            <ellipse cx="49" cy="85" rx="9" ry="9" fill="#2f2f2f"/>
-            <circle cx="62" cy="86" r="3.3" fill="#2f2f2f"/>
-            <circle cx="63.2" cy="84.8" r="1" fill="#fff"/>
-            <ellipse cx="44" cy="101" rx="14" ry="10" fill="#F6BFCB"/>
-            <ellipse cx="40" cy="101" rx="1.8" ry="2.4" fill="#C9889A"/>
-            <ellipse cx="49" cy="102" rx="1.8" ry="2.4" fill="#C9889A"/>
-        </svg>
+<img class="cover-photo" src="assets/vacas.png" alt="Vacas lecheras en pastura">
     </div>
     <h1>FoodCompany</h1>
     <p>Simulador de Gestión de una Empresa del Sector Lácteo</p>
@@ -589,49 +547,7 @@
     <div class="slide active" id="slide1">
         <div class="hero">
             <div class="hero-logo">
-                <svg class="cover-svg" viewBox="0 0 240 182" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vaca lechera y fábrica de lácteos">
-                    <ellipse cx="120" cy="168" rx="112" ry="14" fill="#7BC143"/>
-                    <g opacity="0.96">
-                        <rect x="206" y="92" width="7" height="30" rx="2" fill="#F9A825"/>
-                        <circle cx="209" cy="86" r="4.5" fill="#fff" opacity="0.9"/>
-                        <circle cx="216" cy="79" r="3" fill="#fff" opacity="0.7"/>
-                        <path d="M180 122 L180 106 L192 122 L192 106 L204 122 L204 106 L216 122 Z" fill="#FDEBD0"/>
-                        <rect x="180" y="122" width="36" height="34" rx="3" fill="#FFF3E3"/>
-                        <rect x="186" y="130" width="9" height="9" rx="1.5" fill="#D4F1F9"/>
-                        <rect x="201" y="130" width="9" height="9" rx="1.5" fill="#D4F1F9"/>
-                    </g>
-                    <g fill="#ffffff">
-                        <rect x="96" y="118" width="11" height="38" rx="3"/>
-                        <rect x="113" y="120" width="11" height="36" rx="3"/>
-                        <rect x="146" y="120" width="11" height="36" rx="3"/>
-                        <rect x="161" y="118" width="11" height="38" rx="3"/>
-                    </g>
-                    <g fill="#333333">
-                        <rect x="96" y="150" width="11" height="7" rx="2"/>
-                        <rect x="113" y="150" width="11" height="7" rx="2"/>
-                        <rect x="146" y="150" width="11" height="7" rx="2"/>
-                        <rect x="161" y="150" width="11" height="7" rx="2"/>
-                    </g>
-                    <ellipse cx="133" cy="128" rx="13" ry="10" fill="#F6BFCB"/>
-                    <circle cx="128" cy="137" r="2.2" fill="#E59BAC"/>
-                    <circle cx="138" cy="137" r="2.2" fill="#E59BAC"/>
-                    <path d="M174 92 q15 8 11 28 q-1 7 -6 11" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-                    <circle cx="178" cy="132" r="5" fill="#333333"/>
-                    <ellipse cx="123" cy="100" rx="56" ry="33" fill="#ffffff"/>
-                    <ellipse cx="105" cy="90" rx="17" ry="13" fill="#2f2f2f" transform="rotate(-12 105 90)"/>
-                    <ellipse cx="151" cy="107" rx="15" ry="12" fill="#2f2f2f" transform="rotate(8 151 107)"/>
-                    <ellipse cx="162" cy="86" rx="9" ry="7" fill="#2f2f2f"/>
-                    <ellipse cx="58" cy="93" rx="26" ry="21" fill="#ffffff"/>
-                    <ellipse cx="75" cy="75" rx="9" ry="6" fill="#ffffff" transform="rotate(30 75 75)"/>
-                    <ellipse cx="74" cy="76" rx="4.5" ry="3" fill="#F6BFCB" transform="rotate(30 74 76)"/>
-                    <path d="M50 71 q-3 -11 5 -14" fill="none" stroke="#E8C98F" stroke-width="4.5" stroke-linecap="round"/>
-                    <ellipse cx="49" cy="85" rx="9" ry="9" fill="#2f2f2f"/>
-                    <circle cx="62" cy="86" r="3.3" fill="#2f2f2f"/>
-                    <circle cx="63.2" cy="84.8" r="1" fill="#fff"/>
-                    <ellipse cx="44" cy="101" rx="14" ry="10" fill="#F6BFCB"/>
-                    <ellipse cx="40" cy="101" rx="1.8" ry="2.4" fill="#C9889A"/>
-                    <ellipse cx="49" cy="102" rx="1.8" ry="2.4" fill="#C9889A"/>
-                </svg>
+<img class="cover-photo" src="assets/vacas.png" alt="Vacas lecheras en pastura">
             </div>
             <h1>FoodCompany</h1>
             <p class="subtitle">Simulador de Gestión de una Empresa Productora del Sector Lácteo</p>
