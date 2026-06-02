@@ -445,12 +445,22 @@
         .phone-recover { text-align: center; font-size: 0.72em; color: var(--primary); margin-top: 18px; }
 
         /* ===== CLOSING ===== */
-        .closing { text-align: center; padding: 70px 40px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #fff; }
+        .closing { text-align: center; padding: 70px 40px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #fff; min-height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .closing .closing-emoji { font-size: 3.4em; margin-bottom: 16px; }
-        .closing h1 { font-family: 'Montserrat', sans-serif; font-size: 2.8em; color: #fff; margin-bottom: 16px; }
+        .closing h1 { font-family: 'Montserrat', sans-serif; font-size: 3.4em; color: #fff; margin-bottom: 14px; }
         .closing p { color: rgba(255,255,255,0.92); font-size: 1.15em; max-width: 640px; margin: 0 auto 12px; line-height: 1.7; }
-        .closing .access-box { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 16px; padding: 20px 38px; margin: 22px 0; backdrop-filter: blur(4px); }
-        .closing .access-url { font-family: 'Montserrat', sans-serif; font-size: 1.5em; font-weight: 700; letter-spacing: 1px; }
+        .closing .thanks-sub { font-size: 1.3em; opacity: 0.92; margin-bottom: 38px; }
+        .contact-box { display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.28); border-radius:16px; padding:24px 46px; margin: 4px auto 44px; backdrop-filter: blur(6px); }
+        .contact-line { font-size:1.12em; margin:9px 0; display:flex; align-items:center; gap:10px; justify-content:center; }
+        .contact-line a { color:#fff; text-decoration:none; }
+        .contact-line a:hover { text-decoration:underline; }
+        .sdn-logo { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:30px; }
+        .sdn-mark { width:48px; height:48px; border-radius:50%; border:3px solid #fff; display:flex; align-items:center; justify-content:center; font-size:1.5em; }
+        .sdn-text { text-align:left; line-height:1.08; }
+        .sdn-main { font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.5em; letter-spacing:3px; display:block; }
+        .sdn-sub { font-family:'Montserrat',sans-serif; font-weight:500; letter-spacing:6px; font-size:0.72em; display:block; opacity:0.95; }
+        .sdn-col { font-size:0.62em; letter-spacing:3px; display:block; opacity:0.9; text-transform:uppercase; }
+        .brand-pill { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.2); backdrop-filter:blur(8px); padding:11px 24px; border-radius:30px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.95em; }
 
         /* ===== INTRO OVERLAY ===== */
         .intro-overlay {
@@ -1251,19 +1261,21 @@
     <!-- ===================== SLIDE 14: CIERRE ===================== -->
     <div class="slide" id="slide14">
         <div class="closing">
-            <div class="closing-emoji">🥛🧀🥣</div>
-            <h1>¡Buena suerte en la competencia!</h1>
-            <p>Confía en tu estrategia, analiza el mercado cada periodo y trabaja en equipo. ¡A construir la empresa láctea más valiosa!</p>
-            <div class="access-box">
-                <div style="font-size:0.85em;opacity:0.85;margin-bottom:6px;">Ingresa a la plataforma en:</div>
-                <span class="access-url">app.companygame.com</span>
+            <h1>¡Gracias!</h1>
+            <p class="thanks-sub">Gracias por participar en FoodCompany</p>
+            <div class="contact-box">
+                <div class="contact-line">📧 <a href="mailto:fidelizacion@simuladoresdenegocios.co">fidelizacion@simuladoresdenegocios.co</a></div>
+                <div class="contact-line">💬 <a href="https://wa.me/573017903086">301 790 3086</a></div>
             </div>
-            <p style="font-size:0.9em;opacity:0.85;">Soporte: soporte@companygame.com</p>
-            <div class="hero-brand" style="margin-top:26px;">
-                <span class="cg">C O M P A N Y G A M E</span>
-                <span>•</span>
-                <span>Simuladores de Negocios Colombia</span>
+            <div class="sdn-logo">
+                <span class="sdn-mark">↻</span>
+                <span class="sdn-text">
+                    <span class="sdn-main">SIMULADORES</span>
+                    <span class="sdn-sub">de negocios</span>
+                    <span class="sdn-col">Colombia</span>
+                </span>
             </div>
+            <div class="brand-pill">🥛 FoodCompany</div>
         </div>
     </div>
 
