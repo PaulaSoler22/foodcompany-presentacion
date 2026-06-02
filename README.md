@@ -5,8 +5,14 @@ Presentación interactiva HTML para el simulador de negocios **FoodCompany** de 
 ## Uso
 
 1. Abrir `index.html` en cualquier navegador moderno
-2. Navegar con las flechas laterales o las teclas ← →
-3. Hacer clic en los indicadores de progreso para saltar a un slide
+2. Pulsar **▶ Iniciar presentación** en la pantalla de bienvenida
+3. Navegar con los botones inferiores **Anterior / Siguiente**, las teclas ← → / barra espaciadora, o deslizando en pantallas táctiles
+4. Barra de progreso superior y contador de slide en la barra inferior
+5. Acordeones interactivos en *Segmentos y Competitividad* y *Preguntas Frecuentes*
+
+## Diseño
+
+Inspirado en la presentación de **BusinessGlobal**, adaptado a la identidad visual de FoodCompany (paleta naranja/ámbar). Tarjetas blancas con cabecera en degradado, número de slide como marca de agua, barras de porcentaje animadas y mockup de la plataforma móvil.
 
 ## Estructura
 
