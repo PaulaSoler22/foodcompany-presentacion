@@ -311,6 +311,42 @@
         .factor-content { padding: 22px 25px; color: #555; line-height: 1.8; }
         .factor-content strong { color: var(--dark); }
 
+        /* ===== MÉTODOS / TIMELINE DE IMPLEMENTACIÓN ===== */
+        .method { border-radius: 18px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.12); margin-bottom: 34px; }
+        .method.m-orange { --m1:#F58220; --m2:#E06D10; --msoft:rgba(245,130,32,0.07); }
+        .method.m-green  { --m1:#7BC143; --m2:#5FA130; --msoft:rgba(123,193,67,0.10); }
+        .method.m-teal   { --m1:#00B4D8; --m2:#0090AD; --msoft:rgba(0,180,216,0.09); }
+        .method.m-purple { --m1:#9B59B6; --m2:#7D3C98; --msoft:rgba(155,89,182,0.08); }
+        .method-head { background: linear-gradient(135deg, var(--m1), var(--m2)); color:#fff; padding: 24px 34px; }
+        .method-head h3 { font-family:'Montserrat'; font-size:1.55em; font-weight:800; display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+        .method-head .method-quote { font-style:italic; opacity:0.93; font-size:1em; }
+        .method-body { background:#f7f8fb; padding: 28px 34px 34px; }
+        .tl-title { text-align:center; font-family:'Montserrat'; font-weight:800; font-size:1.5em; color:var(--m2); margin-bottom:6px; }
+        .tl-sub { text-align:center; font-style:italic; color:#666; margin-bottom:6px; }
+
+        .tl { position:relative; padding: 58px 8px 52px; }
+        .tl-track { display:flex; align-items:center; justify-content:space-between; position:relative; }
+        .tl-track::before { content:''; position:absolute; left:1.5%; right:1.5%; top:50%; height:4px; transform:translateY(-50%); border-radius:2px; z-index:0; background: linear-gradient(90deg, var(--m1), var(--m2)); }
+        .tl-node { position:relative; z-index:1; display:flex; align-items:center; justify-content:center; }
+        .tl-week { width:24px; height:24px; border-radius:50%; background:#fff; border:4px solid var(--m2); box-shadow:0 2px 6px rgba(0,0,0,0.12); }
+        .tl-act { width:50px; height:50px; border-radius:50%; background: linear-gradient(135deg, var(--m1), var(--m2)); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.3em; box-shadow:0 4px 14px rgba(0,0,0,0.22); }
+        .tl-label { position:absolute; left:50%; transform:translateX(-50%); width:100px; text-align:center; font-family:'Montserrat'; font-weight:700; font-size:0.66em; text-transform:uppercase; letter-spacing:0.5px; line-height:1.25; color:#54606e; }
+        .tl-label.below { top: calc(100% + 10px); }
+        .tl-label.above { bottom: calc(100% + 10px); }
+        .tl-label.wk { color:#7a8694; font-weight:600; }
+
+        .alt-sub { font-family:'Montserrat'; font-weight:800; color:var(--m2); margin: 22px 0 2px; display:flex; align-items:center; gap:8px; font-size:1.05em; }
+        .tl-auto { border:2px solid var(--m2); border-radius:14px; background:var(--msoft); padding:16px 24px; display:flex; align-items:center; gap:26px; margin-top:6px; }
+        .tl-auto-lbl { font-family:'Montserrat'; font-weight:800; color:var(--m2); font-size:1.05em; line-height:1.2; white-space:nowrap; }
+        .tl-auto-pins { display:flex; justify-content:space-around; flex:1; gap:10px; flex-wrap:wrap; }
+        .tl-auto-pin { display:flex; flex-direction:column; align-items:center; gap:8px; }
+        .tl-auto-pin .pin-lbl { font-family:'Montserrat'; font-weight:700; font-size:0.6em; text-transform:uppercase; letter-spacing:0.5px; color:var(--m2); text-align:center; line-height:1.2; }
+        .tl-auto-pin .pin-c { width:42px; height:42px; border-radius:50%; background: linear-gradient(135deg, var(--m1), var(--m2)); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1em; box-shadow:0 3px 10px rgba(0,0,0,0.18); }
+        @media (max-width: 768px) {
+            .tl-auto { flex-direction:column; gap:14px; }
+            .tl-label { font-size:0.55em; width:74px; }
+        }
+
         /* ===== GALLERY + LIGHTBOX ===== */
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px; margin-top: 28px; }
         .shot {
@@ -839,18 +875,129 @@
     <div class="slide" id="slide12">
         <div class="slide-header">
             <h1>📚 Métodos de Implementación</h1>
-            <h2>Modalidades disponibles para tu experiencia de simulación</h2>
+            <h2>Cuatro formas de integrar el simulador en tu programa académico</h2>
             <div class="slide-number">11</div>
         </div>
         <div class="slide-content">
-            <div class="card-grid">
-                <div class="card"><div class="card-icon">🏫</div><h3>Presencial</h3><p>Sesiones en aula con facilitador. Ideal para debriefing grupal, discusión de estrategias y trabajo en equipo.</p></div>
-                <div class="card bd-teal"><div class="card-icon">💻</div><h3>Virtual Sincrónico</h3><p>Sesiones por videollamada con facilitador en tiempo real. Misma dinámica del presencial, en remoto.</p></div>
-                <div class="card bd-green"><div class="card-icon">📱</div><h3>Virtual Asincrónico</h3><p>Avance autónomo con plazos definidos por periodo. El facilitador revisa los resultados.</p></div>
-                <div class="card bd-red"><div class="card-icon">⚡</div><h3>Intensivo (Business Game)</h3><p>Jornada completa de 8+ horas. Competencia concentrada con múltiples periodos consecutivos.</p></div>
-                <div class="card bd-amber"><div class="card-icon">🔄</div><h3>Híbrido</h3><p>Sesiones presenciales para arranque y cierre, con trabajo autónomo virtual entre periodos.</p></div>
-                <div class="card bd-purple"><div class="card-icon">🎯</div><h3>Competencia Inter-Sedes</h3><p>Equipos de diferentes sedes o universidades compitiendo entre sí. Requiere coordinación de calendario.</p></div>
+
+            <!-- MÉTODO DEDUCTIVO -->
+            <div class="method m-orange">
+                <div class="method-head">
+                    <h3>🔵 Método Deductivo</h3>
+                    <div class="method-quote">"El simulador como herramienta de demostración de aprendizaje"</div>
+                </div>
+                <div class="method-body">
+                    <div class="tl-title">Línea de Tiempo de Implementación</div>
+                    <div class="tl-sub">Parte de la teoría hacia la práctica. Ideal para validar conocimientos previos.</div>
+                    <div class="tl"><div class="tl-track">
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 0</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 6</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 12</span></div>
+                        <div class="tl-node"><span class="tl-act">📖</span><span class="tl-label above">Manual</span></div>
+                        <div class="tl-node"><span class="tl-act">📊</span><span class="tl-label below">Cuadro de Mando</span></div>
+                        <div class="tl-node"><span class="tl-act">🎮</span><span class="tl-label above">Decisión 1</span></div>
+                        <div class="tl-node"><span class="tl-act">🎮</span><span class="tl-label below">Decisión 2</span></div>
+                        <div class="tl-node"><span class="tl-act">🏁</span><span class="tl-label above">Decisión Final</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 16</span></div>
+                    </div></div>
+                </div>
             </div>
+
+            <!-- MÉTODO INDUCTIVO -->
+            <div class="method m-green">
+                <div class="method-head">
+                    <h3>🟢 Método Inductivo</h3>
+                    <div class="method-quote">"El simulador como herramienta que motiva el aprendizaje"</div>
+                </div>
+                <div class="method-body">
+                    <div class="tl-title">Línea de Tiempo de Implementación</div>
+                    <div class="tl-sub">Parte de la experiencia práctica hacia la teoría. Aprendizaje por descubrimiento.</div>
+                    <div class="tl"><div class="tl-track">
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 0</span></div>
+                        <div class="tl-node"><span class="tl-act">📖</span><span class="tl-label above">Manual</span></div>
+                        <div class="tl-node"><span class="tl-act">📊</span><span class="tl-label below">Cuadro de Mando</span></div>
+                        <div class="tl-node"><span class="tl-act">🎮</span><span class="tl-label above">Decisión 1</span></div>
+                        <div class="tl-node"><span class="tl-act">🎮</span><span class="tl-label below">Decisión 2</span></div>
+                        <div class="tl-node"><span class="tl-act">🏁</span><span class="tl-label above">Decisión Final</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 6</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 12</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 16</span></div>
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- MÉTODO MIXTO -->
+            <div class="method m-teal">
+                <div class="method-head">
+                    <h3>🔷 Método Mixto</h3>
+                    <div class="method-quote">"El simulador como evidencia de aprendizaje acumulativo"</div>
+                </div>
+                <div class="method-body">
+                    <div class="tl-title">Línea de Tiempo de Implementación</div>
+                    <div class="tl-sub">Combina lo mejor de ambos mundos. Alterna teoría y práctica intercaladamente.</div>
+                    <div class="tl"><div class="tl-track">
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 0</span></div>
+                        <div class="tl-node"><span class="tl-act">📖</span><span class="tl-label above">Manual</span></div>
+                        <div class="tl-node"><span class="tl-act">📊</span><span class="tl-label above">Cuadro de Mando</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 6</span></div>
+                        <div class="tl-node"><span class="tl-act">🎮</span><span class="tl-label above">Decisión 1</span></div>
+                        <div class="tl-node"><span class="tl-act">🎮</span><span class="tl-label above">Decisión 2</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 12</span></div>
+                        <div class="tl-node"><span class="tl-act">🏁</span><span class="tl-label above">Decisión Final</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 16</span></div>
+                    </div></div>
+                </div>
+            </div>
+
+            <!-- MÉTODOS ALTERNOS -->
+            <div class="method m-purple">
+                <div class="method-head">
+                    <h3>🟣 Métodos Alternos</h3>
+                    <div class="method-quote">"Presencial + Autónomo. Flexibilidad máxima"</div>
+                </div>
+                <div class="method-body">
+                    <div class="tl-title">Modalidades Disponibles</div>
+                    <div class="tl-sub">Dos formatos adaptables según necesidades del grupo.</div>
+
+                    <div class="alt-sub">📅 Presencial — Semanal</div>
+                    <div class="tl" style="padding:46px 8px 28px;"><div class="tl-track">
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 0</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 1</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 2</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 3</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 4</span></div>
+                    </div></div>
+                    <div class="tl-auto">
+                        <span class="tl-auto-lbl">Trabajo<br>Autónomo</span>
+                        <div class="tl-auto-pins">
+                            <div class="tl-auto-pin"><span class="pin-lbl">Manual</span><span class="pin-c">📖</span></div>
+                            <div class="tl-auto-pin"><span class="pin-lbl">Decisión 1</span><span class="pin-c">🎮</span></div>
+                            <div class="tl-auto-pin"><span class="pin-lbl">Decisión 2</span><span class="pin-c">🎮</span></div>
+                            <div class="tl-auto-pin"><span class="pin-lbl">Decisión 3</span><span class="pin-c">🎮</span></div>
+                            <div class="tl-auto-pin"><span class="pin-lbl">Decisión Final</span><span class="pin-c">🏁</span></div>
+                        </div>
+                    </div>
+
+                    <div class="alt-sub">🔥 Presencial — Intensivo (fin de semana)</div>
+                    <div class="tl" style="padding:46px 8px 28px;"><div class="tl-track">
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Viernes</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Sábado</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Viernes</span></div>
+                        <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Sábado</span></div>
+                    </div></div>
+                    <div class="tl-auto">
+                        <span class="tl-auto-lbl">Trabajo<br>Autónomo</span>
+                        <div class="tl-auto-pins">
+                            <div class="tl-auto-pin"><span class="pin-lbl">Manual</span><span class="pin-c">📖</span></div>
+                            <div class="tl-auto-pin"><span class="pin-lbl">Decisión 1</span><span class="pin-c">🎮</span></div>
+                            <div class="tl-auto-pin"><span class="pin-lbl">Decisión 2</span><span class="pin-c">🎮</span></div>
+                            <div class="tl-auto-pin"><span class="pin-lbl">Decisión 3</span><span class="pin-c">🎮</span></div>
+                            <div class="tl-auto-pin"><span class="pin-lbl">Decisión Final</span><span class="pin-c">🏁</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
