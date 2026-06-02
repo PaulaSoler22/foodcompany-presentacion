@@ -163,6 +163,12 @@
             gap: 25px;
             margin-top: 30px;
         }
+        /* Cuatro tarjetas en una sola línea */
+        .card-grid.cols4 { grid-template-columns: repeat(4, 1fr); }
+        .card-grid.cols4 .card { padding: 24px 22px; }
+        .card-grid.cols4 .card h3 { font-size: 1.18em; }
+        @media (max-width: 1024px) { .card-grid.cols4 { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .card-grid.cols4 { grid-template-columns: 1fr; } }
         .card {
             background: linear-gradient(145deg, #ffffff, #fff8f0);
             border-radius: 16px;
@@ -367,7 +373,8 @@
         .factor-consejo strong { color: var(--primary-dark); }
 
         /* ===== CUADRO DE MANDO (tarjetas de informe) ===== */
-        .cm-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(430px,1fr)); gap:26px; margin-top:26px; }
+        .cm-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:24px; margin-top:26px; }
+        @media (max-width: 1024px) { .cm-grid { grid-template-columns: repeat(2, 1fr); } }
         .cm-card { background:#fff; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.1); border:1px solid #eee; overflow:hidden; display:flex; flex-direction:column; transition: box-shadow .3s, transform .3s; }
         .cm-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
         .cm-card .cm-img { padding:14px 14px 0; }
@@ -613,7 +620,7 @@
             <div class="slide-number">03</div>
         </div>
         <div class="slide-content">
-            <div class="card-grid">
+            <div class="card-grid cols4">
                 <div class="card">
                     <div class="card-icon">🏭</div>
                     <h3>El Simulador</h3>
@@ -660,7 +667,7 @@
                 <span class="chain-arrow">→</span>
                 <div class="chain-box cb-teal"><span class="cb-emoji">👥</span>SEGMENTOS</div>
             </div>
-            <div class="card-grid">
+            <div class="card-grid cols4">
                 <div class="card">
                     <h3>Producción</h3>
                     <p>🐄 Recogida de leche<br>⚙️ Elaboración<br>📦 Envasado<br>🔧 Mantenimiento<br>🏗️ Tecnología industrial</p>
@@ -701,7 +708,7 @@
                     <tr><td>Proveedor 3</td><td>Parda Alpina</td><td>0,46 €</td><td><span class="badge badge-teal">Alta</span></td></tr>
                 </tbody>
             </table>
-            <div class="card-grid">
+            <div class="card-grid cols4">
                 <div class="card">
                     <div class="card-icon">📏</div>
                     <h3>Ratios de Producción</h3>
