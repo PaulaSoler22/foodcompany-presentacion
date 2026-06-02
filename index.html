@@ -341,9 +341,15 @@
         .lightbox-close { position: fixed; top: 22px; right: 32px; color: #fff; font-size: 2.4em; cursor: pointer; opacity: 0.8; transition: all 0.2s ease; line-height: 1; }
         .lightbox-close:hover { opacity: 1; transform: scale(1.15); }
 
+        /* ===== CARTELERA (estilo BusinessGlobal) ===== */
+        .cartelera-container { text-align: center; margin: 30px 0; }
+        .cartelera-img { max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); transition: transform 0.3s ease; cursor: zoom-in; }
+        .cartelera-img:hover { transform: scale(1.02); }
+        .cartelera-caption { margin-top: 15px; font-style: italic; color: #666; font-size: 0.95em; }
+
         /* ===== RESERVED AVATAR BOX ===== */
         .reserved {
-            margin-top: 26px; border: 2px dashed var(--primary-light); border-radius: 16px;
+            margin: 30px auto 0; max-width: 760px; border: 2px dashed var(--primary-light); border-radius: 16px;
             background: #fff8f0; padding: 30px; text-align: center; color: #8a6a45;
         }
         .reserved h3 { font-family: 'Montserrat', sans-serif; color: var(--primary-dark); margin-bottom: 8px; }
@@ -453,14 +459,23 @@
             <div class="slide-number">01</div>
         </div>
         <div class="slide-content">
-            <p style="color:#555;line-height:1.7;">CompanyGame ofrece un amplio catálogo de simuladores de negocios para distintas áreas y niveles académicos. <strong style="color:var(--primary-dark);">FoodCompany</strong> se ubica en el área de <strong>Marketing y Ventas</strong>.</p>
-            <div class="shot" style="cursor:zoom-in;margin-top:24px;max-width:760px;margin-left:auto;margin-right:auto;" onclick="openLightbox('assets/cartelera.png','Mapa de Simuladores CompanyGame')">
-                <img src="assets/cartelera.png" alt="Mapa de Simuladores CompanyGame" loading="lazy">
-                <figcaption>Mapa de Simuladores CompanyGame <span class="zoom-hint">🔍 Clic para ampliar</span></figcaption>
+            <p style="color:#555;line-height:1.7;">CompanyGame ofrece una amplia gama de simuladores de negocio organizados por nivel de dificultad y área de conocimiento. <strong style="color:var(--primary-dark);">FoodCompany</strong> se ubica en el área de <strong>Marketing y Ventas</strong>.</p>
+
+            <div class="cartelera-container">
+                <img class="cartelera-img" src="assets/cartelera.jpg" alt="Cartelera de simuladores CompanyGame" loading="lazy" onclick="openLightbox('assets/cartelera.jpg','Cartelera completa de simuladores CompanyGame — Niveles 1 a 7 por área de negocio')">
+                <div class="cartelera-caption">Cartelera completa de simuladores CompanyGame — Niveles 1 a 7 por área de negocio</div>
             </div>
-            <div class="reserved">
-                <h3>🤖 Avatares de IA — espacio reservado</h3>
-                <p>Aquí irá la imagen de los <strong>avatares de IA</strong> de CompanyGame. Para incluirla, guarda el archivo como <code>assets/avatares.png</code> en la carpeta del proyecto.</p>
+
+            <div class="cartelera-container" id="avatares-container">
+                <img class="cartelera-img" src="assets/avatares.png" alt="Avatares de IA de los simuladores CompanyGame" loading="lazy"
+                     onclick="openLightbox('assets/avatares.png','Avatares de IA implementados en los simuladores CompanyGame')"
+                     onerror="this.closest('#avatares-container').style.display='none'; var p=document.getElementById('avatares-pending'); if(p) p.style.display='block';">
+                <div class="cartelera-caption">Avatares de IA implementados en los simuladores CompanyGame</div>
+            </div>
+
+            <div class="reserved" id="avatares-pending" style="display:none;">
+                <h3>🤖 Avatares de IA — pendiente de archivo</h3>
+                <p>Guarda la imagen de avatares como <code>assets/avatares.png</code> en la carpeta del proyecto y aparecerá aquí automáticamente, con el mismo estilo que la cartelera.</p>
             </div>
         </div>
     </div>
