@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodCompany — Simulador de Gestión del Sector Lácteo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========== VARIABLES ========== */
+    :root {
+      --primary: #F58220;
+      --primary-dark: #D96F0E;
+      --primary-light: #FDEBD0;
+      --primary-pale: #FFF5EB;
+      --secondary: #F9A825;
+      --accent-green: #7BC143;
+      --accent-teal: #00B4D8;
+      --accent-red: #E74C3C;
+      --bg-warm: #FFFAF5;
+      --bg-white: #FFFFFF;
+      --bg-section: #FFF3E6;
+      --text-dark: #2D2D2D;
+      --text-body: #444444;
+      --text-muted: #888888;
+      --text-white: #FFFFFF;
+      --cg-blue: #1A5276;
+      --cg-blue-light: #2E86C1;
+      --shadow-sm: 0 2px 8px rgba(245,130,32,0.08);
+      --shadow-md: 0 4px 20px rgba(245,130,32,0.12);
+      --shadow-lg: 0 8px 40px rgba(245,130,32,0.16);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ========== RESET ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-body);
+      background: var(--bg-warm);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== PRESENTATION CONTAINER ========== */
+    .presentation {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ========== SLIDES ========== */
+    .slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 80px;
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+      overflow-y: auto;
+    }
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+    .slide.exit-left {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+
+    /* ========== NAVIGATION ========== */
+    .nav-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--primary);
+      background: rgba(255,255,255,0.92);
+      color: var(--primary);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      backdrop-filter: blur(8px);
+    }
+    .nav-arrow:hover {
+      background: var(--primary);
+      color: var(--text-white);
+      box-shadow: var(--shadow-md);
+    }
+    .nav-arrow.left { left: 20px; }
+    .nav-arrow.right { right: 20px; }
+    .nav-arrow:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
+
+    /* ========== PROGRESS ========== */
+    .progress-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+      background: rgba(255,255,255,0.85);
+      padding: 8px 16px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow-sm);
+    }
+    .progress-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ddd;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+    .progress-dot.active {
+      background: var(--primary);
+      transform: scale(1.3);
+    }
+    .progress-dot:hover { background: var(--secondary); }
+
+    .slide-counter {
+      position: fixed;
+      bottom: 28px;
+      right: 30px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      z-index: 100;
+    }
+
+    /* ========== TYPOGRAPHY ========== */
+    h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; color: var(--text-dark); }
+    .slide-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+    .slide-subtitle {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+    .accent { color: var(--primary); }
+    .accent-green { color: var(--accent-green); }
+    .accent-teal { color: var(--accent-teal); }
+
+    /* ========== CARDS ========== */
+    .card-grid {
+      display: grid;
+      gap: 20px;
+      width: 100%;
+      max-width: 1100px;
+    }
+    .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .card-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+    .card {
+      background: var(--bg-white);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(245,130,32,0.08);
+      transition: var(--transition);
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(245,130,32,0.2);
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    /* ========== MINI CARDS ========== */
+    .mini-card {
+      background: var(--primary-pale);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .mini-card:hover { background: var(--primary-light); }
+    .mini-card .emoji { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+    .mini-card .label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .mini-card .detail {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ========== TABLES ========== */
+    .styled-table {
+      width: 100%;
+      max-width: 900px;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .styled-table thead th {
+      background: var(--primary);
+      color: var(--text-white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      padding: 12px 16px;
+      text-align: center;
+    }
+    .styled-table tbody td {
+      padding: 10px 16px;
+      text-align: center;
+      border-bottom: 1px solid #f0e6da;
+    }
+    .styled-table tbody tr:nth-child(even) { background: var(--primary-pale); }
+    .styled-table tbody tr:hover { background: var(--primary-light); }
+    .styled-table tbody td:first-child {
+      font-weight: 600;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-dark);
+    }
+
+    /* ========== PILL BADGES ========== */
+    .pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .pill-orange { background: var(--primary-light); color: var(--primary-dark); }
+    .pill-green { background: #E8F8D8; color: #4A8C1C; }
+    .pill-teal { background: #D4F1F9; color: #0077A3; }
+    .pill-red { background: #FDEDEC; color: #C0392B; }
+
+    /* ========== CHART BAR ========== */
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      height: 140px;
+      margin: 16px 0;
+    }
+    .bar-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+    .bar {
+      width: 100%;
+      max-width: 60px;
+      border-radius: 8px 8px 0 0;
+      transition: var(--transition);
+      position: relative;
+    }
+    .bar:hover { filter: brightness(1.1); }
+    .bar-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-top: 6px;
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+    }
+    .bar-value {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-white);
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* ========== FLOW DIAGRAM ========== */
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 16px 0;
+    }
+    .flow-step {
+      background: var(--primary);
+      color: var(--text-white);
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .flow-step:hover { background: var(--primary-dark); transform: scale(1.05); }
+    .flow-step.green { background: var(--accent-green); }
+    .flow-step.green:hover { background: #68A838; }
+    .flow-step.teal { background: var(--accent-teal); }
+    .flow-step.teal:hover { background: #0099B8; }
+    .flow-step.amber { background: var(--secondary); }
+    .flow-step.amber:hover { background: #E09620; }
+    .flow-arrow { font-size: 1.2rem; color: var(--primary); font-weight: 700; }
+
+    /* ========== SPECIFIC LAYOUTS ========== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      width: 100%;
+      max-width: 1100px;
+    }
+    .content-wrapper {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    /* ========== PORTADA (Slide 1) ========== */
+    .portada {
+      background: linear-gradient(135deg, #FFF8F0 0%, #FFE8CC 50%, #FFF0DE 100%);
+      text-align: center;
+    }
+    .portada-logo { font-size: 4rem; margin-bottom: 12px; }
+    .portada h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .portada .tagline {
+      font-size: 1.15rem;
+      color: var(--text-body);
+      font-weight: 400;
+      margin-bottom: 32px;
+      max-width: 600px;
+    }
+    .portada-badges {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .portada-footer {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .portada-footer span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .logo-cg {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--cg-blue);
+      letter-spacing: 2px;
+    }
+
+    /* ========== FAQ ACCORDION ========== */
+    .faq-item {
+      background: var(--bg-white);
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      border: 1px solid rgba(245,130,32,0.08);
+    }
+    .faq-question {
+      padding: 16px 20px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: var(--transition);
+    }
+    .faq-question:hover { background: var(--primary-pale); }
+    .faq-question .arrow { transition: var(--transition); color: var(--primary); }
+    .faq-item.open .faq-question .arrow { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+      padding: 0 20px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-body);
+    }
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding: 0 20px 16px;
+    }
+
+    /* ========== GRACIAS (Slide 12) ========== */
+    .gracias {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      text-align: center;
+      color: var(--text-white);
+    }
+    .gracias h1 {
+      color: var(--text-white);
+      font-size: 2.8rem;
+    }
+    .gracias p { color: rgba(255,255,255,0.9); }
+    .gracias .access-box {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: var(--radius);
+      padding: 24px 40px;
+      margin: 24px 0;
+      backdrop-filter: blur(4px);
+    }
+    .gracias .access-url {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* ========== DONUT CHART CSS ========== */
+    .donut-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .donut-item { text-align: center; }
+    .donut-item .donut-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-top: 8px;
+    }
+    .donut-item .donut-pct {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide.active .anim {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    .slide.active .anim-d1 { animation-delay: 0.1s; opacity: 0; }
+    .slide.active .anim-d2 { animation-delay: 0.2s; opacity: 0; }
+    .slide.active .anim-d3 { animation-delay: 0.3s; opacity: 0; }
+    .slide.active .anim-d4 { animation-delay: 0.4s; opacity: 0; }
+    .slide.active .anim-d5 { animation-delay: 0.5s; opacity: 0; }
+
+    /* ========== SCROLLABLE CONTENT ========== */
+    .slide-scrollable {
+      justify-content: flex-start;
+      padding-top: 40px;
+      padding-bottom: 80px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="presentation">
+
+  <!-- ===================== SLIDE 1: PORTADA ===================== -->
+  <section class="slide portada active" id="slide-1">
+    <div class="portada-logo anim anim-d1">🥛</div>
+    <h1 class="anim anim-d2">FoodCompany</h1>
+    <p class="tagline anim anim-d3">Simulador de Gestión de una Empresa Productora del Sector Lácteo</p>
+    <div class="portada-badges anim anim-d4">
+      <span class="pill pill-orange">Nivel 4</span>
+      <span class="pill pill-green">Competitivo</span>
+      <span class="pill pill-teal">16–32 horas</span>
+    </div>
+    <div class="portada-footer anim anim-d5">
+      <span class="logo-cg">C O M P A N Y G A M E</span>
+      <span>•</span>
+      <span>Simuladores de Negocios Colombia</span>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 2: QUÉ ES FOODCOMPANY ===================== -->
+  <section class="slide" id="slide-2">
+    <h2 class="slide-title anim anim-d1">¿Qué es <span class="accent">FoodCompany</span>?</h2>
+    <p class="slide-subtitle anim anim-d2">Escenario competitivo del sector lácteo de gran consumo</p>
+    <div class="two-col anim anim-d3">
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <span class="card-icon">🏭</span>
+          <h3>El Simulador</h3>
+          <p>Reproduce la competencia entre compañías lácteas. Cada equipo gestiona una empresa que produce y comercializa <strong>leche, yogur y queso fresco</strong>, tomando decisiones de marketing, operaciones y finanzas.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">🌍</span>
+          <h3>Escenario Macroeconómico</h3>
+          <p>El mercado evoluciona según variables como <strong>PIB, IPC, Tipo de Interés</strong> y <strong>Confianza Económica</strong>. Debes estar atento al entorno para adaptar tu estrategia.</p>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <span class="card-icon">🎯</span>
+          <h3>Tu Misión</h3>
+          <p>Dirigir tu empresa láctea tomando decisiones en: <strong>Precios, Producto, Gestión Comercial, Promoción/Marca, Producción y Financiación</strong>. El objetivo es maximizar el <strong>Valor de la Compañía</strong>.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">📦</span>
+          <h3>3 Líneas de Producto</h3>
+          <div style="display:flex; gap:12px; margin-top:12px;">
+            <div class="mini-card" style="flex:1;"><span class="emoji">🥛</span><span class="label">Leche</span></div>
+            <div class="mini-card" style="flex:1;"><span class="emoji">🥣</span><span class="label">Yogur</span></div>
+            <div class="mini-card" style="flex:1;"><span class="emoji">🧀</span><span class="label">Queso Fresco</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 3: CARTELERA SIMULADORES ===================== -->
+  <section class="slide slide-scrollable" id="slide-3">
+    <h2 class="slide-title anim anim-d1">🎮 Cartelera de <span class="accent">Simuladores</span></h2>
+    <p class="slide-subtitle anim anim-d2">Nuestro portafolio de simuladores de negocios para universidades</p>
+    <div class="card-grid cols-3 anim anim-d3" style="max-width:1100px;">
+      <div class="card" style="border-left: 4px solid var(--primary);">
+        <span class="card-icon">🏢</span>
+        <h3>CompanyGame</h3>
+        <p><strong>FoodCompany</strong>, BusinessGlobal, MarkStrat, SimBrand, StartUp Company, GreenTech, TechCompany, y más. Simuladores para marketing, estrategia, emprendimiento y sostenibilidad.</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--accent-green);">
+        <span class="card-icon">🚀</span>
+        <h3>SimVenture</h3>
+        <p><strong>SimVenture Classic</strong> y <strong>Evolution</strong>. Simuladores de emprendimiento donde creas y gestionas tu propia empresa desde cero.</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--accent-teal);">
+        <span class="card-icon">📊</span>
+        <h3>LABSAG</h3>
+        <p><strong>Simpro</strong> (producción), <strong>Marklog</strong> (logística), <strong>Tenpomatic</strong> (finanzas), <strong>Simdef</strong> (decisiones financieras), <strong>Brandestrat</strong> (marketing).</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--secondary);">
+        <span class="card-icon">📋</span>
+        <h3>SimProject</h3>
+        <p>Simulador de <strong>gestión de proyectos</strong>. Ideal para programas de ingeniería, MBA y certificaciones PMI.</p>
+      </div>
+      <div class="card" style="border-left: 4px solid #9B59B6;">
+        <span class="card-icon">⚡</span>
+        <h3>SimAgile</h3>
+        <p>Simulador de <strong>metodologías ágiles</strong>. Scrum, Kanban y desarrollo ágil de productos en equipos.</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--accent-red);">
+        <span class="card-icon">🎓</span>
+        <h3>Propios</h3>
+        <p>Simuladores desarrollados a medida para necesidades académicas específicas de cada institución.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 4: CADENA DE VALOR ===================== -->
+  <section class="slide" id="slide-4">
+    <h2 class="slide-title anim anim-d1">🔗 Cadena de <span class="accent">Valor</span></h2>
+    <p class="slide-subtitle anim anim-d2">El flujo completo desde la materia prima hasta el consumidor</p>
+    <div class="content-wrapper anim anim-d3">
+      <div class="flow" style="margin-bottom:28px;">
+        <div class="flow-step">🏭 PRODUCCIÓN</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step amber">📦 PRODUCTO · PRECIO · PROMOCIÓN</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step green">🛒 COMERCIALIZACIÓN</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step teal">👥 SEGMENTOS</div>
+      </div>
+      <div class="card-grid cols-4 anim anim-d4">
+        <div class="card" style="border-top:3px solid var(--primary);">
+          <h3 style="color:var(--primary);">Producción</h3>
+          <p>🐄 Recogida de leche<br>⚙️ Elaboración<br>📦 Envasado<br>🔧 Mantenimiento<br>🏗️ Tecnología industrial</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--secondary);">
+          <h3 style="color:var(--secondary);">Producto</h3>
+          <p>💲 Precio<br>📊 Gama de productos<br>🏷️ Marca<br>📦 Packaging<br>⭐ Calidad</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--accent-green);">
+          <h3 style="color:var(--accent-green);">Comercialización</h3>
+          <p>💰 Descuento al canal<br>📢 Promoción en PdV<br>🚚 Modalidad distribución</p>
+        </div>
+        <div class="card" style="border-top:3px solid var(--accent-teal);">
+          <h3 style="color:var(--accent-teal);">Segmentos</h3>
+          <p>👦 Niños y jóvenes<br>👩 Adultos<br>🥗 Healthy</p>
+          <hr style="border:0; border-top:1px solid #eee; margin:8px 0;">
+          <p style="font-size:0.75rem;">💳 Financiación: Préstamos LP/CP, Plazos cobro/pago</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 5: PRODUCCIÓN Y PROVEEDORES ===================== -->
+  <section class="slide slide-scrollable" id="slide-5">
+    <h2 class="slide-title anim anim-d1">🐄 Producción y <span class="accent">Proveedores</span></h2>
+    <p class="slide-subtitle anim anim-d2">Materia prima, ratios de producción e inventarios</p>
+    <div class="two-col anim anim-d3" style="max-width:1100px;">
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <h3>🥛 3 Proveedores de Leche</h3>
+          <p style="margin-bottom:12px;">Cada proveedor ofrece una variedad de leche diferente, según la raza de vaca:</p>
+          <table class="styled-table" style="box-shadow:none; font-size:0.82rem;">
+            <thead>
+              <tr><th>Proveedor</th><th>Raza</th><th>Costo/L</th><th>Calidad</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Proveedor 1</td><td>Frisona</td><td>0,32€</td><td><span class="pill pill-orange">Básica</span></td></tr>
+              <tr><td>Proveedor 2</td><td>Fleckviek</td><td>0,38€</td><td><span class="pill pill-green">Media</span></td></tr>
+              <tr><td>Proveedor 3</td><td>Parda Alpina</td><td>0,46€</td><td><span class="pill pill-teal">Alta</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>📏 Ratios de Producción</h3>
+          <div style="display:flex; gap:10px; margin-top:12px;">
+            <div class="mini-card" style="flex:1;"><span class="emoji">🥛</span><span class="label">1L Leche</span><span class="detail">= 1L materia prima</span></div>
+            <div class="mini-card" style="flex:1;"><span class="emoji">🥣</span><span class="label">1L Yogur</span><span class="detail">= 1,2L leche</span></div>
+            <div class="mini-card" style="flex:1;"><span class="emoji">🧀</span><span class="label">1kg Queso</span><span class="detail">= 5L leche</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <h3>📦 Amplitud de Gama</h3>
+          <p style="margin-bottom:12px;">Cada línea permite ampliar variedades (light, funcional, sabores…):</p>
+          <div style="display:flex; gap:10px;">
+            <div class="mini-card" style="flex:1; background:#FFF3E6;"><span class="emoji">🥛</span><span class="label">Leche</span><span class="detail">1 a 3 gamas</span></div>
+            <div class="mini-card" style="flex:1; background:#FFF3E6;"><span class="emoji">🥣</span><span class="label">Yogur</span><span class="detail">1 a 15 gamas</span></div>
+            <div class="mini-card" style="flex:1; background:#FFF3E6;"><span class="emoji">🧀</span><span class="label">Queso</span><span class="detail">1 a 5 gamas</span></div>
+          </div>
+          <p style="font-size:0.78rem; margin-top:10px; color:var(--text-muted);">⚠️ Más gamas = más atractivo, pero también más costos de producción.</p>
+        </div>
+        <div class="card" style="margin-bottom:16px;">
+          <h3>📋 Gestión de Inventarios</h3>
+          <p>Los productos son <strong>perecederos</strong>. Si no se venden en el periodo, permanecen en stock y pueden venderse en el Q1 del año siguiente. Si no se venden, <strong>caducan</strong> y se registran como pérdida.</p>
+        </div>
+        <div class="card">
+          <h3>🔧 Capacidad de Fábrica</h3>
+          <p>Elaboración y envasado tienen capacidades independientes. Puedes <strong>ampliarla</strong> invirtiendo, pero se reflejará en el activo fijo y la depreciación.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 6: ÁREAS DE DECISIÓN ===================== -->
+  <section class="slide slide-scrollable" id="slide-6">
+    <h2 class="slide-title anim anim-d1">⚙️ Áreas de <span class="accent">Decisión</span></h2>
+    <p class="slide-subtitle anim anim-d2">Todas las palancas que manejas como equipo directivo</p>
+    <div class="card-grid cols-3 anim anim-d3" style="max-width:1100px;">
+      <div class="card" style="border-top:3px solid var(--primary);">
+        <span class="card-icon">💲</span>
+        <h3>Precio y Ventas</h3>
+        <p>Precio por producto (leche, yogur, queso). Descuento por canal (Tienda, Gran Superficie, Hostelería). Promoción en punto de venta.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--secondary);">
+        <span class="card-icon">🏷️</span>
+        <h3>Marca</h3>
+        <p>Priorización de segmentos (escala 1-10, suma máx. 21). Gasto en promoción de marca por producto.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--accent-green);">
+        <span class="card-icon">🧪</span>
+        <h3>Producto</h3>
+        <p>Mejora de calidad (presupuesto). Amplitud de gama. Nivel de packaging (1-5). Selección de proveedor de leche.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--accent-teal);">
+        <span class="card-icon">🏭</span>
+        <h3>Producción</h3>
+        <p>Unidades a fabricar por producto. Ampliación capacidad. Gasto de mantenimiento (% sobre inmovilizado).</p>
+      </div>
+      <div class="card" style="border-top:3px solid #9B59B6;">
+        <span class="card-icon">🚚</span>
+        <h3>Distribución</h3>
+        <p>Modalidad logística (1 a 5). Modalidad 1 = eficiente. Modalidad 5 = mejor servicio al punto de venta. Costo entre 2 y 9 céntimos.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--accent-red);">
+        <span class="card-icon">🏦</span>
+        <h3>Financiación</h3>
+        <p>Préstamo largo plazo (hasta 4M€). Préstamo corto plazo (hasta 500K€). Plazos de cobro a clientes y pago a proveedores.</p>
+      </div>
+    </div>
+    <p class="anim anim-d4" style="margin-top:20px; font-size:0.85rem; color:var(--text-muted); text-align:center; max-width:800px;">
+      💡 <strong>Sala de Reuniones:</strong> Accede a proyectos estratégicos adicionales. <strong>Consultor:</strong> Compra informes sobre el mercado y la competencia (disponibles en el periodo siguiente).
+    </p>
+  </section>
+
+  <!-- ===================== SLIDE 7: SEGMENTOS Y COMPETITIVIDAD ===================== -->
+  <section class="slide" id="slide-7">
+    <h2 class="slide-title anim anim-d1">🎯 Segmentos y <span class="accent">Competitividad</span></h2>
+    <p class="slide-subtitle anim anim-d2">3 segmentos de demanda × 3 canales × 4 factores competitivos</p>
+    <div class="two-col anim anim-d3" style="max-width:1100px;">
+      <div>
+        <div class="card" style="margin-bottom:16px;">
+          <h3>👥 Segmentos de Demanda</h3>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:12px;">
+            <div style="display:flex; align-items:center; gap:12px; padding:10px; background:var(--primary-pale); border-radius:10px;">
+              <span style="font-size:1.5rem;">👦</span>
+              <div><strong>Niños y Jóvenes</strong> (hasta 18 años)<br><span style="font-size:0.8rem; color:var(--text-muted);">Sabor, nutrición y calidad</span></div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:10px; background:#E8F8D8; border-radius:10px;">
+              <span style="font-size:1.5rem;">👩</span>
+              <div><strong>Adultos</strong> (18+ años)<br><span style="font-size:0.8rem; color:var(--text-muted);">Calidad, salud y nutrición</span></div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px; padding:10px; background:#D4F1F9; border-radius:10px;">
+              <span style="font-size:1.5rem;">🥗</span>
+              <div><strong>Healthy</strong><br><span style="font-size:0.8rem; color:var(--text-muted);">Dieta, salud y calidad</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>🏪 Canales de Distribución</h3>
+          <div style="display:flex; gap:10px; margin-top:12px;">
+            <div class="mini-card" style="flex:1;"><span class="emoji">🏠</span><span class="label">Tienda Tradicional</span></div>
+            <div class="mini-card" style="flex:1;"><span class="emoji">🏬</span><span class="label">Gran Superficie</span></div>
+            <div class="mini-card" style="flex:1;"><span class="emoji">🍽️</span><span class="label">Hostelería</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3>⚖️ Factores de Competitividad por Segmento</h3>
+          <p style="margin:8px 0; font-size:0.82rem; color:var(--text-muted);">Mayor cantidad de puntos = mayor importancia para ese segmento</p>
+          <table class="styled-table" style="box-shadow:none; font-size:0.82rem;">
+            <thead>
+              <tr><th>Factor</th><th>Niños/Jóvenes</th><th>Adultos</th><th>Healthy</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>💲 Precio</td><td>●●●●●</td><td>●●●●</td><td>●●●</td></tr>
+              <tr><td>🏷️ Marca</td><td>●●●</td><td>●●●●●</td><td>●●●●</td></tr>
+              <tr><td>🧪 Producto</td><td>●●●●</td><td>●●●●</td><td>●●●●●</td></tr>
+              <tr><td>🚚 Cobertura</td><td>●●●●</td><td>●●●</td><td>●●●</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:0.78rem; margin-top:12px; color:var(--text-muted);">💡 Para <strong>Niños</strong> el precio pesa más. Para <strong>Adultos</strong> la marca. Para <strong>Healthy</strong> el producto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 8: CUADRO DE MANDO ===================== -->
+  <section class="slide slide-scrollable" id="slide-8">
+    <h2 class="slide-title anim anim-d1">📊 Cuadro de <span class="accent">Mando</span></h2>
+    <p class="slide-subtitle anim anim-d2">Los indicadores clave para monitorear tu empresa</p>
+    <div class="card-grid cols-3 anim anim-d3" style="max-width:1100px;">
+      <div class="card" style="text-align:center;">
+        <span class="card-icon">📈</span>
+        <h3>Ventas y Mercado</h3>
+        <p>Unidades vendidas<br>Participación de mercado (%)<br>Ingresos totales<br>Ingreso medio por L/Kg</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <span class="card-icon">💰</span>
+        <h3>Rentabilidad</h3>
+        <p>Utilidad Bruta<br>Utilidad Neta<br>Ratio Utilidad/Ingresos (%)<br>Rentabilidad s/ Patrimonio (%)</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <span class="card-icon">🏭</span>
+        <h3>Producción</h3>
+        <p>Capacidad fabricación<br>Tasa ocupación fábrica (%)<br>Inventario s/ ventas (%)<br>Nivel eficiencia (1-10)</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <span class="card-icon">🏷️</span>
+        <h3>Marca y Producto</h3>
+        <p>Valor de Marca (1-100)<br>Valor de Producto (1-10)</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <span class="card-icon">🚚</span>
+        <h3>Distribución</h3>
+        <p>Cobertura distribución (%)<br>Puntos de venta activos</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <span class="card-icon">🏦</span>
+        <h3>Financiero</h3>
+        <p>Endeudamiento<br>Caja / Bancos<br>Crédito extraordinario</p>
+      </div>
+    </div>
+    <div class="anim anim-d4" style="margin-top:24px; max-width:900px;">
+      <div class="card" style="background:var(--primary-pale);">
+        <h3 style="text-align:center; margin-bottom:12px;">📋 Estructura de la Cuenta de Resultados</h3>
+        <div class="flow">
+          <div class="flow-step" style="font-size:0.7rem;">Ingresos</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step amber" style="font-size:0.7rem;">– Costes Ventas</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step green" style="font-size:0.7rem;">= Margen</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step teal" style="font-size:0.7rem;">– Gastos Op.</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step" style="font-size:0.7rem; background:var(--cg-blue);">= Rdo. Neto</div>
+        </div>
+        <p style="text-align:center; font-size:0.78rem; color:var(--text-muted); margin-top:8px;">Gastos de Operaciones = Marketing + Personal + Innovación + Generales + Depreciación + Financieros</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 9: VALOR DE LA COMPAÑÍA ===================== -->
+  <section class="slide" id="slide-9">
+    <h2 class="slide-title anim anim-d1">🏆 Valor de la <span class="accent">Compañía</span></h2>
+    <p class="slide-subtitle anim anim-d2">La métrica principal de evaluación — objetivo: crecer al menos 7% cada periodo</p>
+    <div class="content-wrapper anim anim-d3">
+      <div class="bar-chart" style="height:200px; max-width:800px; margin:0 auto 24px;">
+        <div class="bar-item">
+          <div class="bar" style="height:90%; background:var(--primary);"><span class="bar-value">45%</span></div>
+          <span class="bar-label">Resultados Económicos</span>
+        </div>
+        <div class="bar-item">
+          <div class="bar" style="height:48%; background:var(--secondary);"><span class="bar-value">12%</span></div>
+          <span class="bar-label">Participación Mercado</span>
+        </div>
+        <div class="bar-item">
+          <div class="bar" style="height:48%; background:var(--accent-green);"><span class="bar-value">12%</span></div>
+          <span class="bar-label">Valor Producto</span>
+        </div>
+        <div class="bar-item">
+          <div class="bar" style="height:48%; background:var(--accent-teal);"><span class="bar-value">12%</span></div>
+          <span class="bar-label">Valor Marca</span>
+        </div>
+        <div class="bar-item">
+          <div class="bar" style="height:28%; background:#9B59B6;"><span class="bar-value">7%</span></div>
+          <span class="bar-label">Cobertura Distrib.</span>
+        </div>
+        <div class="bar-item">
+          <div class="bar" style="height:24%; background:var(--cg-blue);"><span class="bar-value">6%</span></div>
+          <span class="bar-label">Eficiencia Prod.</span>
+        </div>
+        <div class="bar-item">
+          <div class="bar" style="height:24%; background:var(--cg-blue-light);"><span class="bar-value">6%</span></div>
+          <span class="bar-label">Rentab. y Solvencia</span>
+        </div>
+      </div>
+      <div class="card anim anim-d4" style="max-width:800px; margin:0 auto; background:var(--primary-pale);">
+        <p style="text-align:center; font-size:0.9rem;">
+          <strong>💡 Consejo estratégico:</strong> Define primero tu estrategia de mercado y operación. Evalúa tu posición en cada factor clave. Fija objetivos operativos por periodo. El Valor de Compañía refleja la capacidad de ser un <strong>negocio sostenible y rentable</strong> a corto, medio y largo plazo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 10: MÉTODOS DE IMPLEMENTACIÓN ===================== -->
+  <section class="slide" id="slide-10">
+    <h2 class="slide-title anim anim-d1">📚 Métodos de <span class="accent">Implementación</span></h2>
+    <p class="slide-subtitle anim anim-d2">Modalidades disponibles para tu experiencia de simulación</p>
+    <div class="card-grid cols-3 anim anim-d3" style="max-width:1100px;">
+      <div class="card" style="text-align:center; border-top:3px solid var(--primary);">
+        <span class="card-icon">🏫</span>
+        <h3>Presencial</h3>
+        <p>Sesiones en aula con facilitador. Ideal para debriefing grupal, discusión de estrategias y trabajo en equipo presencial.</p>
+      </div>
+      <div class="card" style="text-align:center; border-top:3px solid var(--accent-teal);">
+        <span class="card-icon">💻</span>
+        <h3>Virtual Sincrónico</h3>
+        <p>Sesiones por videollamada con facilitador en tiempo real. Misma dinámica del presencial, con equipos conectados remotamente.</p>
+      </div>
+      <div class="card" style="text-align:center; border-top:3px solid var(--accent-green);">
+        <span class="card-icon">📱</span>
+        <h3>Virtual Asincrónico</h3>
+        <p>Avance autónomo con plazos definidos por periodo. El equipo coordina sus decisiones y el facilitador revisa resultados.</p>
+      </div>
+      <div class="card" style="text-align:center; border-top:3px solid var(--accent-red);">
+        <span class="card-icon">⚡</span>
+        <h3>Intensivo (Business Game)</h3>
+        <p>Jornada completa de 8+ horas. Competencia concentrada con múltiples periodos consecutivos. Alta intensidad.</p>
+      </div>
+      <div class="card" style="text-align:center; border-top:3px solid var(--secondary);">
+        <span class="card-icon">🔄</span>
+        <h3>Híbrido</h3>
+        <p>Combinación de sesiones presenciales para arranque y cierre con trabajo autónomo virtual entre periodos.</p>
+      </div>
+      <div class="card" style="text-align:center; border-top:3px solid #9B59B6;">
+        <span class="card-icon">🎯</span>
+        <h3>Competencia Inter-Sedes</h3>
+        <p>Equipos de diferentes sedes o universidades compitiendo entre sí. Requiere coordinación de calendario.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 11: PREGUNTAS FRECUENTES ===================== -->
+  <section class="slide slide-scrollable" id="slide-11">
+    <h2 class="slide-title anim anim-d1">❓ Preguntas <span class="accent">Frecuentes</span></h2>
+    <p class="slide-subtitle anim anim-d2">Las dudas más comunes antes de iniciar la simulación</p>
+    <div class="content-wrapper anim anim-d3" style="max-width:800px;">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Cuántos periodos tiene la simulación?
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-answer">Depende de la configuración del profesor, pero típicamente se juegan entre 6 y 10 periodos. Cada periodo representa un año de gestión de tu empresa láctea.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Cómo se forman los equipos?
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-answer">El profesor asigna equipos de 3 a 5 personas. Cada equipo gestiona una empresa independiente (Lactum, Premium, TopLeche, GoMilk o Quality) que compite contra las demás.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Puedo cambiar mis decisiones después de enviarlas?
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-answer">Sí, puedes modificar tus decisiones todas las veces que quieras mientras el periodo esté abierto. Una vez que el profesor cierra el periodo y ejecuta la simulación, las decisiones son definitivas.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Qué pasa si no envío decisiones a tiempo?
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-answer">Se repetirán automáticamente las decisiones del periodo anterior. Esto puede perjudicar tu empresa si el mercado cambia, así que siempre intenta decidir activamente.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Cómo se evalúa mi desempeño?
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-answer">La métrica principal es el <strong>Valor de la Compañía</strong>, que integra resultados económicos (45%), participación de mercado (12%), valor de producto (12%), valor de marca (12%), cobertura (7%), eficiencia (6%) y rentabilidad/solvencia (6%).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Necesito conocimientos previos de finanzas o marketing?
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-answer">No es indispensable. El simulador es intuitivo y el manual del usuario te guía en cada decisión. Aprenderás estos conceptos durante la simulación — ¡ese es precisamente el objetivo!</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Qué es el Crédito Extraordinario?
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-answer">Es un préstamo que el sistema activa automáticamente si tu empresa no tiene fondos para cubrir sus pagos. Su costo es un 50% superior al de un préstamo normal. ¡Evítalo planificando bien tu financiación!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 12: PLATAFORMA + GRACIAS ===================== -->
+  <section class="slide gracias" id="slide-12">
+    <div style="font-size:3rem; margin-bottom:16px;" class="anim anim-d1">🥛🧀🥣</div>
+    <h1 class="anim anim-d2">¡Buena suerte en la competencia!</h1>
+    <p style="font-size:1.1rem; margin:12px 0 24px; max-width:600px;" class="anim anim-d3">
+      Accede a la plataforma con las credenciales proporcionadas por tu profesor
+    </p>
+    <div class="access-box anim anim-d4">
+      <p style="font-size:0.85rem; margin-bottom:8px; opacity:0.8;">Ingresa a la plataforma en:</p>
+      <span class="access-url">app.companygame.com</span>
+    </div>
+    <div style="margin-top:24px; display:flex; gap:20px; align-items:center;" class="anim anim-d5">
+      <span style="font-family:'Montserrat'; font-weight:800; font-size:0.85rem; letter-spacing:2px; opacity:0.9;">C O M P A N Y G A M E</span>
+      <span style="opacity:0.5;">•</span>
+      <span style="font-family:'Montserrat'; font-weight:500; font-size:0.85rem; opacity:0.9;">Simuladores de Negocios Colombia</span>
+    </div>
+    <p style="margin-top:16px; font-size:0.8rem; opacity:0.7;">soporte@companygame.com</p>
+  </section>
+
+  <!-- ========== NAVIGATION ========== -->
+  <button class="nav-arrow left" id="btn-prev" onclick="changeSlide(-1)" disabled>◀</button>
+  <button class="nav-arrow right" id="btn-next" onclick="changeSlide(1)">▶</button>
+
+  <div class="progress-bar" id="progress-bar"></div>
+  <div class="slide-counter" id="slide-counter">1 / 12</div>
+
+</div>
+
+<script>
+  // ========== SLIDE NAVIGATION ==========
+  const totalSlides = 12;
+  let currentSlide = 1;
+
+  // Build progress dots
+  const progressBar = document.getElementById('progress-bar');
+  for (let i = 1; i <= totalSlides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'progress-dot' + (i === 1 ? ' active' : '');
+    dot.dataset.slide = i;
+    dot.onclick = () => goToSlide(i);
+    progressBar.appendChild(dot);
+  }
+
+  function changeSlide(direction) {
+    const next = currentSlide + direction;
+    if (next < 1 || next > totalSlides) return;
+    goToSlide(next);
+  }
+
+  function goToSlide(n) {
+    if (n === currentSlide) return;
+    const oldSlide = document.getElementById('slide-' + currentSlide);
+    const newSlide = document.getElementById('slide-' + n);
+
+    // Direction-aware exit
+    if (n > currentSlide) {
+      oldSlide.classList.add('exit-left');
+    }
+    oldSlide.classList.remove('active');
+
+    setTimeout(() => {
+      oldSlide.classList.remove('exit-left');
+      newSlide.classList.add('active');
+    }, 80);
+
+    currentSlide = n;
+    updateControls();
+  }
+
+  function updateControls() {
+    document.getElementById('btn-prev').disabled = currentSlide === 1;
+    document.getElementById('btn-next').disabled = currentSlide === totalSlides;
+    document.getElementById('slide-counter').textContent = currentSlide + ' / ' + totalSlides;
+
+    document.querySelectorAll('.progress-dot').forEach(dot => {
+      dot.classList.toggle('active', parseInt(dot.dataset.slide) === currentSlide);
+    });
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  });
+
+  // ========== FAQ ACCORDION ==========
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
