@@ -390,6 +390,16 @@
         .cm-why-text strong { color:var(--primary-dark); }
         @media (max-width: 768px) { .cm-grid { grid-template-columns: 1fr; } }
 
+        /* ===== DECISIONES (bloques numerados) ===== */
+        .dec-block { border-radius:16px; overflow:hidden; box-shadow:0 6px 24px rgba(0,0,0,0.1); margin-bottom:26px; border:1px solid #eee; }
+        .dec-head { display:flex; align-items:center; gap:18px; padding:20px 28px; background:linear-gradient(135deg, var(--primary), var(--amber)); color:#fff; }
+        .dec-num { flex-shrink:0; width:46px; height:46px; border-radius:12px; background:rgba(255,255,255,0.25); display:flex; align-items:center; justify-content:center; font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.4em; }
+        .dec-head h3 { font-family:'Montserrat',sans-serif; font-size:1.3em; margin-bottom:3px; }
+        .dec-head p { font-size:0.92em; opacity:0.95; line-height:1.45; }
+        .dec-shot { padding:22px 26px 26px; background:#f7f9fb; text-align:center; }
+        .dec-shot img { width:100%; max-width:920px; border-radius:10px; border:1px solid #e0e6ea; box-shadow:0 4px 16px rgba(0,0,0,0.1); cursor:zoom-in; transition:transform .3s ease; }
+        .dec-shot img:hover { transform:scale(1.01); }
+
         /* ===== GALLERY + LIGHTBOX ===== */
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px; margin-top: 28px; }
         .shot {
@@ -957,11 +967,46 @@
             <div class="slide-number">09</div>
         </div>
         <div class="slide-content">
-            <p style="color:#555;line-height:1.7;">Estas son las pantallas reales de decisión de FoodCompany, organizadas por área. <strong>Haz clic en cada imagen para verla en detalle.</strong></p>
-            <div class="gallery">
-                <figure class="shot" onclick="openLightbox('assets/dec-01.png','Precio, Ventas y Promoción')"><img src="assets/dec-01.png" alt="Precio, Ventas y Promoción" loading="lazy"><figcaption>💲 Precio · Descuento por Canal · Promoción PdV <span class="zoom-hint">🔍</span></figcaption></figure>
-                <figure class="shot" onclick="openLightbox('assets/dec-02.png','Marca y Producto')"><img src="assets/dec-02.png" alt="Marca y Producto" loading="lazy"><figcaption>🏷️ Marca (segmentos) · Producto (calidad, gama, packaging) <span class="zoom-hint">🔍</span></figcaption></figure>
-                <figure class="shot" onclick="openLightbox('assets/dec-03.png','Producción y Financiación')"><img src="assets/dec-03.png" alt="Producción y Financiación" loading="lazy"><figcaption>🏭 Producción (fabricación, capacidad, logística) · 🏦 Financiación <span class="zoom-hint">🔍</span></figcaption></figure>
+            <p style="color:#555;line-height:1.7;">Cada periodo tomas decisiones en 5 áreas. Estas son las pantallas reales del simulador. <strong>Haz clic en cualquier imagen para verla en detalle.</strong></p>
+
+            <div class="dec-block">
+                <div class="dec-head">
+                    <span class="dec-num">1</span>
+                    <div><h3>💲 Precio y Ventas</h3><p>Fija el precio de cada producto (leche, yogur, queso), el descuento por canal y el gasto en promoción en el punto de venta.</p></div>
+                </div>
+                <div class="dec-shot"><img src="assets/dec-01.png" alt="Decisiones de Precio y Ventas" loading="lazy" onclick="openLightbox('assets/dec-01.png','Precio y Ventas')"></div>
+            </div>
+
+            <div class="dec-block">
+                <div class="dec-head">
+                    <span class="dec-num">2</span>
+                    <div><h3>🏷️ Promoción y Marca</h3><p>Prioriza los segmentos de demanda (suma máxima de 21 puntos) y asigna el presupuesto de promoción de marca por producto.</p></div>
+                </div>
+                <div class="dec-shot"><img src="assets/dec-promo.png" alt="Decisiones de Promoción y Marca" loading="lazy" onclick="openLightbox('assets/dec-promo.png','Promoción y Marca')"></div>
+            </div>
+
+            <div class="dec-block">
+                <div class="dec-head">
+                    <span class="dec-num">3</span>
+                    <div><h3>🧪 Producto</h3><p>Decide el gasto en mejora de calidad, la amplitud de gama, el nivel de packaging y el proveedor de materia prima.</p></div>
+                </div>
+                <div class="dec-shot"><img src="assets/dec-producto.png" alt="Decisiones de Producto" loading="lazy" onclick="openLightbox('assets/dec-producto.png','Producto')"></div>
+            </div>
+
+            <div class="dec-block">
+                <div class="dec-head">
+                    <span class="dec-num">4</span>
+                    <div><h3>🏭 Producción</h3><p>Planifica las unidades a fabricar, la ampliación de capacidad, el gasto de mantenimiento y la modalidad logística.</p></div>
+                </div>
+                <div class="dec-shot"><img src="assets/dec-produccion.png" alt="Decisiones de Producción" loading="lazy" onclick="openLightbox('assets/dec-produccion.png','Producción')"></div>
+            </div>
+
+            <div class="dec-block">
+                <div class="dec-head">
+                    <span class="dec-num">5</span>
+                    <div><h3>🏦 Financiación</h3><p>Solicita préstamos a largo y corto plazo según las necesidades de caja de tu empresa.</p></div>
+                </div>
+                <div class="dec-shot"><img src="assets/dec-financiacion.png" alt="Decisiones de Financiación" loading="lazy" onclick="openLightbox('assets/dec-financiacion.png','Financiación')"></div>
             </div>
         </div>
     </div>
