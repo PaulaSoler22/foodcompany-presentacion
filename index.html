@@ -347,6 +347,42 @@
             .tl-label { font-size:0.55em; width:74px; }
         }
 
+        /* ===== CARACTERÍSTICAS DE MÉTODO ===== */
+        .features { background:#fff; border:2px solid var(--m2); border-radius:14px; padding:22px 26px; margin-top:24px; }
+        .features h4 { font-family:'Montserrat'; font-weight:800; color:var(--m2); font-size:1.15em; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+        .features ul { list-style:none; padding:0; }
+        .features li { position:relative; padding:7px 0 7px 28px; color:#444; line-height:1.5; }
+        .features li::before { content:'✓'; position:absolute; left:2px; color:var(--m2); font-weight:800; }
+        .features .ideal { margin-top:14px; background:var(--msoft); border-radius:10px; padding:12px 16px; color:#445; line-height:1.5; }
+        .features .ideal strong { color:var(--m2); }
+
+        /* ===== FACTOR COLORS / CONTENT (Valor de la Compañía) ===== */
+        .factor-purple { background: linear-gradient(135deg, #9B59B6, #7D3C98); }
+        .factor-red    { background: linear-gradient(135deg, #EC7063, #C0392B); }
+        .factor-blue   { background: linear-gradient(135deg, #2E86C1, #1A5276); }
+        .factor-item.active .factor-body { max-height: 680px; }
+        .factor-content p { margin-bottom: 10px; }
+        .factor-content p:last-child { margin-bottom: 0; }
+        .factor-consejo { background:#fff8f0; border-left:4px solid var(--amber); border-radius:8px; padding:12px 16px; margin-top:6px; color:#555; line-height:1.6; }
+        .factor-consejo strong { color: var(--primary-dark); }
+
+        /* ===== CUADRO DE MANDO (tarjetas de informe) ===== */
+        .cm-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(430px,1fr)); gap:26px; margin-top:26px; }
+        .cm-card { background:#fff; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.1); border:1px solid #eee; overflow:hidden; display:flex; flex-direction:column; transition: box-shadow .3s, transform .3s; }
+        .cm-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+        .cm-card .cm-img { padding:14px 14px 0; }
+        .cm-card .cm-img img { width:100%; border-radius:8px; border:1px solid #e6e6e6; cursor:zoom-in; display:block; transition: transform .3s ease; }
+        .cm-card .cm-img img:hover { transform: scale(1.01); }
+        .cm-card .cm-body { padding:16px 22px 22px; display:flex; flex-direction:column; flex:1; }
+        .cm-titlerow { display:flex; align-items:center; gap:10px; }
+        .cm-titlerow h3 { font-family:'Montserrat'; font-size:1.18em; color:var(--dark); display:flex; align-items:center; gap:8px; }
+        .cm-badge { margin-left:auto; background:#FDEBD0; color:#B35900; font-family:'Montserrat'; font-weight:700; font-size:0.66em; text-transform:uppercase; letter-spacing:0.5px; padding:5px 12px; border-radius:20px; white-space:nowrap; }
+        .cm-desc { color:#666; line-height:1.6; font-size:0.9em; margin:10px 0 14px; border-bottom:1px dashed #e2e8ee; padding-bottom:14px; }
+        .cm-why-label { align-self:flex-start; display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg,var(--primary),var(--amber)); color:#fff; font-family:'Montserrat'; font-weight:700; font-size:0.7em; text-transform:uppercase; letter-spacing:0.5px; padding:8px 16px; border-radius:20px; box-shadow:0 3px 10px rgba(245,130,32,0.3); }
+        .cm-why-text { background:#fff8f0; border-radius:10px; padding:12px 16px; margin-top:10px; color:#555; line-height:1.6; font-size:0.88em; }
+        .cm-why-text strong { color:var(--primary-dark); }
+        @media (max-width: 768px) { .cm-grid { grid-template-columns: 1fr; } }
+
         /* ===== GALLERY + LIGHTBOX ===== */
         .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px; margin-top: 28px; }
         .shot {
@@ -791,17 +827,99 @@
             <div class="slide-number">08</div>
         </div>
         <div class="slide-content">
-            <p style="color:#555;line-height:1.7;">Tras cada periodo, el simulador entrega un completo cuadro de mando con informes y gráficos. <strong>Haz clic en cualquier imagen para ampliarla.</strong></p>
-            <div class="gallery">
-                <figure class="shot" onclick="openLightbox('assets/cm-01.png','Valor de la Compañía')"><img src="assets/cm-01.png" alt="Valor de la Compañía" loading="lazy"><figcaption>🏆 Valor de la Compañía <span class="zoom-hint">🔍</span></figcaption></figure>
-                <figure class="shot" onclick="openLightbox('assets/cm-02.png','Indicadores Clave')"><img src="assets/cm-02.png" alt="Indicadores Clave" loading="lazy"><figcaption>📈 Indicadores Clave <span class="zoom-hint">🔍</span></figcaption></figure>
-                <figure class="shot" onclick="openLightbox('assets/cm-03.png','Comparativa de Precios')"><img src="assets/cm-03.png" alt="Comparativa de Precios" loading="lazy"><figcaption>💲 Comparativa de Precios <span class="zoom-hint">🔍</span></figcaption></figure>
-                <figure class="shot" onclick="openLightbox('assets/cm-04.png','Análisis de Producción')"><img src="assets/cm-04.png" alt="Análisis de Producción" loading="lazy"><figcaption>🏭 Análisis de Producción <span class="zoom-hint">🔍</span></figcaption></figure>
-                <figure class="shot" onclick="openLightbox('assets/cm-05.png','Participación de Mercado')"><img src="assets/cm-05.png" alt="Participación de Mercado" loading="lazy"><figcaption>🌐 Participación de Mercado <span class="zoom-hint">🔍</span></figcaption></figure>
-                <figure class="shot" onclick="openLightbox('assets/cm-06.png','Análisis de Ventas')"><img src="assets/cm-06.png" alt="Análisis de Ventas" loading="lazy"><figcaption>🛒 Análisis de Ventas <span class="zoom-hint">🔍</span></figcaption></figure>
-                <figure class="shot" onclick="openLightbox('assets/cm-07.png','Análisis de Ingresos')"><img src="assets/cm-07.png" alt="Análisis de Ingresos" loading="lazy"><figcaption>💰 Análisis de Ingresos <span class="zoom-hint">🔍</span></figcaption></figure>
-                <figure class="shot" onclick="openLightbox('assets/cm-08.png','Análisis de Margen')"><img src="assets/cm-08.png" alt="Análisis de Margen" loading="lazy"><figcaption>📊 Análisis de Margen <span class="zoom-hint">🔍</span></figcaption></figure>
-                <figure class="shot" onclick="openLightbox('assets/cm-09.png','Cuenta de Resultados y Balance')"><img src="assets/cm-09.png" alt="Cuenta de Resultados y Balance" loading="lazy"><figcaption>🧾 Cuenta de Resultados y Balance <span class="zoom-hint">🔍</span></figcaption></figure>
+            <p style="color:#555;line-height:1.7;">En el Cuadro de Mando encontrarás diversos informes para analizar tu gestión y la de la competencia. <strong>Haz clic en cualquier imagen para ampliarla.</strong></p>
+            <div class="cm-grid">
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-01.png" alt="Valor de la Compañía" loading="lazy" onclick="openLightbox('assets/cm-01.png','Valor de la Compañía')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>📈 Valor de la Compañía</h3><span class="cm-badge">Principal</span></div>
+                        <div class="cm-desc">Comparativa del valor total de todas las compañías con evolución histórica y variación porcentual entre periodos.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Es el indicador que <strong>define quién gana</strong>. Te dice si vas líder o rezagado y cuánto debes mejorar; marca la ambición de las decisiones del próximo periodo.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-02.png" alt="Indicadores Clave" loading="lazy" onclick="openLightbox('assets/cm-02.png','Indicadores Clave de la Compañía')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🔑 Indicadores Clave</h3><span class="cm-badge">Análisis</span></div>
+                        <div class="cm-desc">Tabla completa con unidades vendidas, participación, ingresos, márgenes, resultados, endeudamiento, valor de marca y producto.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Es la <strong>visión 360° del negocio</strong>. Cruzar participación, márgenes y endeudamiento revela dónde ganas o pierdes dinero realmente.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-03.png" alt="Comparativa de Precios" loading="lazy" onclick="openLightbox('assets/cm-03.png','Comparativa de Precios')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>💲 Comparativa de Precios</h3><span class="cm-badge">Marketing</span></div>
+                        <div class="cm-desc">Precio por litro/kilo de cada producto (leche, yogur, queso) frente a toda la competencia.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">El precio es <strong>decisivo para los segmentos sensibles</strong>. Comparar tu precio con el del mercado evita quedar fuera de rango.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-04.png" alt="Análisis de Producción" loading="lazy" onclick="openLightbox('assets/cm-04.png','Análisis de Producción')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🏭 Análisis de Producción</h3><span class="cm-badge">Operaciones</span></div>
+                        <div class="cm-desc">Capacidad, unidades producidas, ocupación de fábrica, inventarios y costos por producto.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Detecta <strong>cuellos de botella y exceso de inventario</strong> perecedero antes de planificar la producción siguiente.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-05.png" alt="Participación de Mercado" loading="lazy" onclick="openLightbox('assets/cm-05.png','Participación de Mercado')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🌐 Participación de Mercado</h3><span class="cm-badge">Mercado</span></div>
+                        <div class="cm-desc">Cuota de mercado en unidades e ingresos, repartida entre todas las compañías.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Muestra tu <strong>tamaño real frente a los rivales</strong> y si tu crecimiento viene del volumen o del precio.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-06.png" alt="Análisis de Ventas" loading="lazy" onclick="openLightbox('assets/cm-06.png','Análisis de Ventas')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🛒 Análisis de Ventas</h3><span class="cm-badge">Ventas</span></div>
+                        <div class="cm-desc">Unidades vendidas por producto y por canal, con evolución y distribución porcentual.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Revela <strong>qué producto y qué canal impulsan tus ventas</strong> para enfocar la promoción y la distribución.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-07.png" alt="Análisis de Ingresos" loading="lazy" onclick="openLightbox('assets/cm-07.png','Análisis de Ingresos')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>💰 Análisis de Ingresos</h3><span class="cm-badge">Finanzas</span></div>
+                        <div class="cm-desc">Ingresos por producto, evolución y distribución porcentual de la facturación.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Identifica <strong>de dónde viene el dinero</strong> y qué línea conviene potenciar o ajustar en precio.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-08.png" alt="Análisis de Margen" loading="lazy" onclick="openLightbox('assets/cm-08.png','Análisis de Margen')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>📊 Análisis de Margen</h3><span class="cm-badge">Rentabilidad</span></div>
+                        <div class="cm-desc">Margen sobre ingresos por producto, su evolución y la distribución del margen total.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Vender mucho no basta: <strong>el margen dice qué producto realmente aporta beneficio</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-09.png" alt="Cuenta de Resultados y Balance" loading="lazy" onclick="openLightbox('assets/cm-09.png','Cuenta de Resultados y Balance')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🧾 Cuenta de Resultados y Balance</h3><span class="cm-badge">Contabilidad</span></div>
+                        <div class="cm-desc">Estado de resultados completo y balance de la compañía, con variación entre periodos.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Es la <strong>radiografía financiera</strong>: controla gastos, resultado neto, deuda y patrimonio para asegurar la solvencia.</div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -831,42 +949,86 @@
             <div class="slide-number">10</div>
         </div>
         <div class="slide-content">
-            <p style="color:#555;line-height:1.7;">El <strong>Valor de la Compañía</strong> resume la salud del negocio a corto, medio y largo plazo. Se compone de <strong>7 factores ponderados</strong>; conoce cuánto pesa cada uno y qué mide:</p>
+            <p style="color:#555;line-height:1.7;">El <strong>Valor de la Compañía</strong> resume la salud del negocio a corto, medio y largo plazo. Se compone de <strong>7 factores ponderados</strong>. Haz clic en cada factor para ver su detalle:</p>
 
-            <div class="factor-block">
-                <div class="pct-label"><span>Resultados Económicos</span><span class="pct-num">45%</span></div>
-                <div class="percentage-track"><div class="percentage-fill fill-orange" style="--target-width:90%;">45%</div></div>
-                <div class="pct-desc">El factor de mayor peso. Mide los <strong>beneficios obtenidos y su evolución</strong> en los últimos periodos. Una empresa rentable y con resultados crecientes domina el ranking.</div>
-            </div>
-            <div class="factor-block">
-                <div class="pct-label"><span>Participación de Mercado</span><span class="pct-num">12%</span></div>
-                <div class="percentage-track"><div class="percentage-fill fill-amber" style="--target-width:48%;">12%</div></div>
-                <div class="pct-desc">La <strong>cuota de mercado</strong> alcanzada en los diferentes productos (leche, yogur, queso), medida en unidades e ingresos.</div>
-            </div>
-            <div class="factor-block">
-                <div class="pct-label"><span>Valor de Producto</span><span class="pct-num">12%</span></div>
-                <div class="percentage-track"><div class="percentage-fill fill-green" style="--target-width:48%;">12%</div></div>
-                <div class="pct-desc">La <strong>calidad percibida del producto</strong> en una escala de 1 a 10, resultado de la inversión en calidad, amplitud de gama y packaging.</div>
-            </div>
-            <div class="factor-block">
-                <div class="pct-label"><span>Valor de Marca</span><span class="pct-num">12%</span></div>
-                <div class="percentage-track"><div class="percentage-fill fill-teal" style="--target-width:48%;">12%</div></div>
-                <div class="pct-desc">La <strong>fortaleza de la marca</strong> en una escala de 10 a 100, construida con inversión sostenida en promoción de marca.</div>
-            </div>
-            <div class="factor-block">
-                <div class="pct-label"><span>Cobertura de Distribución</span><span class="pct-num">7%</span></div>
-                <div class="percentage-track"><div class="percentage-fill fill-purple" style="--target-width:32%;">7%</div></div>
-                <div class="pct-desc">El <strong>porcentaje de puntos de venta</strong> en los que está presente tu producto. A mayor cobertura, más oportunidades de venta.</div>
-            </div>
-            <div class="factor-block">
-                <div class="pct-label"><span>Eficiencia Productiva</span><span class="pct-num">6%</span></div>
-                <div class="percentage-track"><div class="percentage-fill fill-red" style="--target-width:28%;">6%</div></div>
-                <div class="pct-desc">El <strong>nivel de eficiencia de la producción</strong>: buen aprovechamiento de la capacidad de fábrica y control de costos productivos.</div>
-            </div>
-            <div class="factor-block">
-                <div class="pct-label"><span>Rentabilidad y Solvencia</span><span class="pct-num">6%</span></div>
-                <div class="percentage-track"><div class="percentage-fill fill-blue" style="--target-width:28%;">6%</div></div>
-                <div class="pct-desc">Los <strong>ratios financieros</strong> de rentabilidad y salud financiera (endeudamiento y solvencia). Refleja un crecimiento sólido y sostenible.</div>
+            <div class="factor-accordion">
+                <div class="factor-item active">
+                    <div class="factor-header factor-orange" onclick="toggleFactor(this)">
+                        <span>📈 Resultados Económicos</span>
+                        <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">45%</span><span class="factor-icon">▼</span></span>
+                    </div>
+                    <div class="factor-body"><div class="factor-content">
+                        <p><strong>Descripción:</strong> Se vincula directamente con los <strong>beneficios obtenidos por la compañía</strong>. Se considera tanto el valor alcanzado en cada periodo como la <strong>evolución de los últimos periodos</strong>.</p>
+                        <p><strong>¿Qué evalúa?</strong> La rentabilidad histórica y la tendencia de mejora o deterioro de los resultados financieros. Es el factor de mayor peso (45%).</p>
+                        <div class="factor-consejo">💡 <strong>Consejo:</strong> Mantén beneficios positivos y consistentes; evita pérdidas que penalicen la valoración histórica.</div>
+                    </div></div>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-header factor-amber" onclick="toggleFactor(this)">
+                        <span>🌐 Participación de Mercado</span>
+                        <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">12%</span><span class="factor-icon">▼</span></span>
+                    </div>
+                    <div class="factor-body"><div class="factor-content">
+                        <p><strong>Descripción:</strong> Mide la <strong>cuota de mercado</strong> alcanzada en los diferentes productos (leche, yogur, queso), tanto en unidades como en ingresos.</p>
+                        <p><strong>¿Qué evalúa?</strong> Tu posición competitiva frente al resto de empresas del sector.</p>
+                        <div class="factor-consejo">💡 <strong>Consejo:</strong> Equilibra precio, cobertura y marca para ganar cuota sin destruir el margen.</div>
+                    </div></div>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-header factor-green" onclick="toggleFactor(this)">
+                        <span>🧪 Valor de Producto</span>
+                        <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">12%</span><span class="factor-icon">▼</span></span>
+                    </div>
+                    <div class="factor-body"><div class="factor-content">
+                        <p><strong>Descripción:</strong> Refleja la <strong>calidad percibida del producto</strong> en una escala de 1 a 10.</p>
+                        <p><strong>¿Qué evalúa?</strong> El resultado de tu inversión en calidad, amplitud de gama y packaging.</p>
+                        <div class="factor-consejo">💡 <strong>Consejo:</strong> Invierte de forma sostenida en calidad; los saltos bruscos rinden menos que la mejora constante.</div>
+                    </div></div>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-header factor-teal" onclick="toggleFactor(this)">
+                        <span>🏷️ Valor de Marca</span>
+                        <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">12%</span><span class="factor-icon">▼</span></span>
+                    </div>
+                    <div class="factor-body"><div class="factor-content">
+                        <p><strong>Descripción:</strong> Mide la <strong>fortaleza de la marca</strong> en una escala de 10 a 100.</p>
+                        <p><strong>¿Qué evalúa?</strong> El reconocimiento y la preferencia que generas mediante la promoción de marca.</p>
+                        <div class="factor-consejo">💡 <strong>Consejo:</strong> La marca se construye a largo plazo; mantén una inversión constante en promoción.</div>
+                    </div></div>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-header factor-purple" onclick="toggleFactor(this)">
+                        <span>🚚 Cobertura de Distribución</span>
+                        <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">7%</span><span class="factor-icon">▼</span></span>
+                    </div>
+                    <div class="factor-body"><div class="factor-content">
+                        <p><strong>Descripción:</strong> Indica el <strong>porcentaje de puntos de venta</strong> en los que está presente tu producto.</p>
+                        <p><strong>¿Qué evalúa?</strong> Tu capacidad de llegar al consumidor a través de los canales (Tienda, Gran Superficie, Hostelería).</p>
+                        <div class="factor-consejo">💡 <strong>Consejo:</strong> Ajusta la modalidad logística y los descuentos al canal para ampliar tu cobertura.</div>
+                    </div></div>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-header factor-red" onclick="toggleFactor(this)">
+                        <span>⚙️ Eficiencia Productiva</span>
+                        <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">6%</span><span class="factor-icon">▼</span></span>
+                    </div>
+                    <div class="factor-body"><div class="factor-content">
+                        <p><strong>Descripción:</strong> Mide el <strong>nivel de eficiencia de la producción</strong> en una escala de 1 a 10.</p>
+                        <p><strong>¿Qué evalúa?</strong> El aprovechamiento de la capacidad de fábrica y el control de los costos productivos.</p>
+                        <div class="factor-consejo">💡 <strong>Consejo:</strong> Ajusta la producción a la demanda y mantén buena ocupación sin exceso de inventario perecedero.</div>
+                    </div></div>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-header factor-blue" onclick="toggleFactor(this)">
+                        <span>🏦 Rentabilidad y Solvencia</span>
+                        <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">6%</span><span class="factor-icon">▼</span></span>
+                    </div>
+                    <div class="factor-body"><div class="factor-content">
+                        <p><strong>Descripción:</strong> Recoge los <strong>ratios financieros</strong> de rentabilidad y salud financiera (endeudamiento y solvencia).</p>
+                        <p><strong>¿Qué evalúa?</strong> El equilibrio entre rentabilidad, deuda y liquidez de la empresa.</p>
+                        <div class="factor-consejo">💡 <strong>Consejo:</strong> Financia el crecimiento sin sobreendeudarte; evita caer en el crédito extraordinario.</div>
+                    </div></div>
+                </div>
             </div>
         </div>
     </div>
@@ -900,6 +1062,17 @@
                         <div class="tl-node"><span class="tl-act">🏁</span><span class="tl-label above">Decisión Final</span></div>
                         <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 16</span></div>
                     </div></div>
+                    <div class="features">
+                        <h4>📋 Características</h4>
+                        <ul>
+                            <li>Comienzas estudiando el manual y la teoría antes de decidir</li>
+                            <li>La primera ronda de decisiones ya está fundamentada en los conceptos aprendidos</li>
+                            <li>Análisis de resultados mediante el Cuadro de Mando</li>
+                            <li>El simulador demuestra y valida la teoría en la práctica</li>
+                            <li>Cierre consolidando teoría + evidencia de resultados</li>
+                        </ul>
+                        <div class="ideal"><strong>✅ Ideal para:</strong> Asignaturas formales, cursos con base teórica previa, evaluación de competencias.</div>
+                    </div>
                 </div>
             </div>
 
@@ -923,6 +1096,17 @@
                         <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 12</span></div>
                         <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 16</span></div>
                     </div></div>
+                    <div class="features">
+                        <h4>📋 Características</h4>
+                        <ul>
+                            <li>Empiezas a decidir SIN leer el manual (aprendizaje por descubrimiento)</li>
+                            <li>Consultas el manual tras la primera experiencia para entender resultados</li>
+                            <li>Análisis de resultados mediante el Cuadro de Mando</li>
+                            <li>Segunda ronda informada por la teoría</li>
+                            <li>Cierre con aprendizaje consolidado tras reflexión sobre errores</li>
+                        </ul>
+                        <div class="ideal"><strong>✅ Ideal para:</strong> Bootcamps, workshops, aprendizaje experiencial, motivación inicial.</div>
+                    </div>
                 </div>
             </div>
 
@@ -946,6 +1130,17 @@
                         <div class="tl-node"><span class="tl-act">🏁</span><span class="tl-label above">Decisión Final</span></div>
                         <div class="tl-node"><span class="tl-week"></span><span class="tl-label below wk">Semana 16</span></div>
                     </div></div>
+                    <div class="features">
+                        <h4>📋 Características</h4>
+                        <ul>
+                            <li>Alternas bloques de teoría con rondas de decisión</li>
+                            <li>Cada concepto se aplica de inmediato en el simulador</li>
+                            <li>Análisis continuo con el Cuadro de Mando entre rondas</li>
+                            <li>Aprendizaje acumulativo: cada periodo construye sobre el anterior</li>
+                            <li>Cierre con evidencia del progreso a lo largo del curso</li>
+                        </ul>
+                        <div class="ideal"><strong>✅ Ideal para:</strong> Asignaturas semestrales y programas con sesiones regulares.</div>
+                    </div>
                 </div>
             </div>
 
@@ -994,6 +1189,17 @@
                             <div class="tl-auto-pin"><span class="pin-lbl">Decisión 3</span><span class="pin-c">🎮</span></div>
                             <div class="tl-auto-pin"><span class="pin-lbl">Decisión Final</span><span class="pin-c">🏁</span></div>
                         </div>
+                    </div>
+                    <div class="features">
+                        <h4>📋 Características</h4>
+                        <ul>
+                            <li>Combina sesiones presenciales con trabajo autónomo del equipo</li>
+                            <li>Disponible en formato semanal o intensivo de fin de semana</li>
+                            <li>Las decisiones se preparan de forma autónoma entre sesiones</li>
+                            <li>Máxima flexibilidad de calendario para el grupo</li>
+                            <li>El facilitador guía solo los puntos de encuentro clave</li>
+                        </ul>
+                        <div class="ideal"><strong>✅ Ideal para:</strong> Programas ejecutivos, educación continua y grupos con poca disponibilidad.</div>
                     </div>
                 </div>
             </div>
