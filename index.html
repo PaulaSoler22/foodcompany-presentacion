@@ -434,6 +434,15 @@
         .plataforma-steps li:last-child { border-bottom: none; }
         .plataforma-steps .step-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--amber)); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 700; }
         .plataforma-steps strong { color: var(--primary-dark); }
+        .ingreso-title { font-family:'Montserrat',sans-serif; font-weight:800; font-size:2em; color:var(--primary); line-height:1.1; margin-bottom:6px; }
+        .ingreso-title::after { content:''; display:block; width:120px; height:5px; background:var(--primary); border-radius:3px; margin-top:14px; }
+        .ingreso-list { list-style:none; padding:0; margin-top:28px; counter-reset: ing; }
+        .ingreso-list li { counter-increment: ing; position:relative; padding:14px 0 14px 42px; font-size:1.15em; color:#444; line-height:1.45; border-bottom:1px solid #f0e6da; }
+        .ingreso-list li:last-child { border-bottom:none; }
+        .ingreso-list li::before { content: counter(ing) "."; position:absolute; left:2px; top:14px; font-family:'Montserrat',sans-serif; font-weight:800; color:var(--primary); font-size:1.05em; }
+        .ingreso-list a { color:var(--primary-dark); font-weight:700; text-decoration:none; word-break:break-all; }
+        .ingreso-list a:hover { text-decoration:underline; }
+        .phone-logo small.tagline { letter-spacing:2px; color:#9aa; font-size:0.4em; }
         .phone-mock { width: 290px; max-width: 100%; margin: 0 auto; background: #1a1a1a; border-radius: 42px; padding: 14px; box-shadow: 0 25px 60px rgba(0,0,0,0.35); animation: float 4s ease infinite; }
         .phone-screen { background: #fff; border-radius: 30px; overflow: hidden; padding: 8px 26px 38px; position: relative; }
         .phone-notch { width: 130px; height: 24px; background: #1a1a1a; border-radius: 0 0 16px 16px; margin: 0 auto 28px; }
@@ -572,24 +581,23 @@
         <div class="slide-content">
             <div class="plataforma-cols">
                 <div>
-                    <ul class="plataforma-steps">
-                        <li><span class="step-num">1</span><div>Ingresa a <strong><a href="https://app.companygame.com" style="color:var(--primary-dark);">app.companygame.com</a></strong> desde cualquier navegador.</div></li>
-                        <li><span class="step-num">2</span><div>Usa las <strong>credenciales</strong> que te proporcionó tu profesor.</div></li>
-                        <li><span class="step-num">3</span><div>Lee el <strong>manual del usuario</strong> y revisa el escenario inicial de tu empresa.</div></li>
-                        <li><span class="step-num">4</span><div>Toma tus decisiones, <strong>guárdalas</strong> y espera el cierre del periodo.</div></li>
-                        <li><span class="step-num">📧</span><div>Soporte: <strong>soporte@companygame.com</strong></div></li>
-                    </ul>
+                    <ol class="ingreso-list">
+                        <li><a href="https://plataforma.companygame.net/">https://plataforma.companygame.net/</a></li>
+                        <li>Usuario y código personal (contraseña)</li>
+                        <li>Uso 100% en la nube</li>
+                        <li>Desde cualquier dispositivo y en cualquier lugar</li>
+                    </ol>
                 </div>
                 <div>
                     <div class="phone-mock">
                         <div class="phone-screen">
                             <div class="phone-notch"></div>
-                            <div class="phone-logo">COMPANYGAME<small>FOODCOMPANY</small></div>
-                            <div class="phone-title">Acceso a la plataforma</div>
-                            <div class="phone-field">Usuario · tu-email@universidad.edu</div>
-                            <div class="phone-field">Contraseña · ••••••••</div>
-                            <div class="phone-btn">INICIAR SESIÓN</div>
-                            <div class="phone-recover">¿Olvidaste tu contraseña?</div>
+                            <div class="phone-logo">COMPANYGAME<small class="tagline">APRENDE SIMULANDO</small></div>
+                            <div class="phone-title">Acceso a la plataforma CompanyGame</div>
+                            <div class="phone-field">E-mail <span style="color:var(--accent-red);">*</span></div>
+                            <div class="phone-field">Código personal <span style="color:var(--accent-red);">*</span></div>
+                            <div class="phone-btn">ENTRAR</div>
+                            <div class="phone-recover">¿Olvidó su Código personal? / Recupere su contraseña</div>
                         </div>
                     </div>
                 </div>
