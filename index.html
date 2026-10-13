@@ -490,6 +490,32 @@
         .sdn-img { width:300px; max-width:80%; height:auto; display:block; margin:0 auto; }
         .contact-line .wa-icon { width:22px; height:22px; fill:#fff; flex-shrink:0; }
         .brand-pill { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.2); backdrop-filter:blur(8px); padding:11px 24px; border-radius:30px; font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.95em; }
+        .social-row { display:flex; gap:16px; justify-content:center; margin:2px auto 32px; position:relative; z-index:1; }
+        .social-icon { width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.32); display:flex; align-items:center; justify-content:center; transition:transform 0.2s ease, background 0.2s ease; }
+        .social-icon:hover { background:rgba(255,255,255,0.32); transform:translateY(-3px); }
+        .social-icon svg { width:22px; height:22px; fill:#fff; }
+
+        /* ===== SECTION DIVIDER (slides separadoras) ===== */
+        .section-divider {
+            min-height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 60px 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--amber) 60%, #FFC979 100%);
+            color: var(--white); position: relative; overflow: hidden;
+        }
+        .section-divider::before {
+            content: ''; position: absolute; top: -20%; left: -10%; width: 480px; height: 480px;
+            background: rgba(255,255,255,0.08); border-radius: 50%;
+        }
+        .section-divider::after {
+            content: ''; position: absolute; bottom: -25%; right: -10%; width: 380px; height: 380px;
+            background: rgba(255,255,255,0.08); border-radius: 50%;
+        }
+        .section-divider .sd-icon { font-size: 4.5em; margin-bottom: 18px; position: relative; z-index: 1; animation: float 3s ease infinite; }
+        .section-divider .sd-eyebrow { font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 5px; font-size: 0.95em; opacity: 0.85; margin-bottom: 14px; position: relative; z-index: 1; text-transform: uppercase; }
+        .section-divider h1 { font-family: 'Montserrat', sans-serif; font-size: 3.4em; font-weight: 800; margin-bottom: 18px; position: relative; z-index: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.15); }
+        .section-divider p { font-size: 1.2em; opacity: 0.95; max-width: 680px; margin: 0 auto; line-height: 1.6; position: relative; z-index: 1; }
+        .section-divider .sd-rule { width: 90px; height: 4px; background: rgba(255,255,255,0.7); border-radius: 2px; margin: 26px auto 0; position: relative; z-index: 1; }
+        @media (max-width: 768px) { .section-divider h1 { font-size: 2.1em; } }
 
         /* ===== INTRO OVERLAY ===== */
         .intro-overlay {
@@ -631,12 +657,51 @@
         </div>
     </div>
 
-    <!-- ===================== SLIDE 4: ¿QUÉ ES? ===================== -->
+    <!-- ===================== SLIDE 4: DIVISORIA — ENTORNO DE SIMULACIÓN ===================== -->
     <div class="slide" id="slide4">
+        <div class="section-divider">
+            <div class="sd-icon">🖥️</div>
+            <div class="sd-eyebrow">Sección</div>
+            <h1>Entorno de Simulación</h1>
+            <p>Conoce la plataforma antes de empezar a competir</p>
+            <div class="sd-rule"></div>
+        </div>
+    </div>
+
+    <!-- ===================== SLIDE 5: MANUAL ===================== -->
+    <div class="slide" id="slide5">
+        <div class="slide-header">
+            <h1>📖 Manual del Simulador</h1>
+            <h2>Tu guía de referencia para cada decisión del periodo</h2>
+            <div class="slide-number">03</div>
+        </div>
+        <div class="slide-content">
+            <div class="plataforma-cols">
+                <div>
+                    <div class="cartelera-container" id="manual-container">
+                        <img class="cartelera-img" src="assets/manual-cover.png" alt="Portada del Manual de FoodCompany" loading="lazy"
+                             onclick="openLightbox('assets/manual-cover.png','Manual de FoodCompany')"
+                             onerror="this.closest('#manual-container').style.display='none'; var p=document.getElementById('manual-pending'); if(p) p.style.display='block';">
+                    </div>
+                    <div class="reserved" id="manual-pending" style="display:none;">
+                        <h3>📖 Foto del manual — pendiente de archivo</h3>
+                        <p>Guarda la portada o una captura del manual como <code>assets/manual-cover.png</code> en la carpeta del proyecto y aparecerá aquí automáticamente.</p>
+                    </div>
+                </div>
+                <div>
+                    <p style="color:#555;line-height:1.7;margin-bottom:24px;">El manual explica en detalle cada área de decisión, las fórmulas del simulador y cómo interpretar el Cuadro de Mando. Consúltalo siempre que tengas dudas antes de enviar tus decisiones.</p>
+                    <a href="https://drive.google.com/file/d/1L6Pb4ZQOs9ZlPgY7WQbtAN5VFHhXiuZx/view?usp=sharing" target="_blank" rel="noopener" class="phone-btn" style="display:block;text-decoration:none;padding:16px;font-size:0.95em;">📥 DESCARGAR EL MANUAL</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== SLIDE 6: ¿QUÉ ES? ===================== -->
+    <div class="slide" id="slide6">
         <div class="slide-header">
             <h1>¿Qué es FoodCompany?</h1>
             <h2>Escenario competitivo del sector lácteo de gran consumo</h2>
-            <div class="slide-number">03</div>
+            <div class="slide-number">04</div>
         </div>
         <div class="slide-content">
             <div class="card-grid cols4">
@@ -669,12 +734,12 @@
         </div>
     </div>
 
-    <!-- ===================== SLIDE 5: CADENA DE VALOR ===================== -->
-    <div class="slide" id="slide5">
+    <!-- ===================== SLIDE 7: CADENA DE VALOR ===================== -->
+    <div class="slide" id="slide7">
         <div class="slide-header">
             <h1>🔗 Cadena de Valor</h1>
             <h2>El flujo completo desde la materia prima hasta el consumidor</h2>
-            <div class="slide-number">04</div>
+            <div class="slide-number">05</div>
         </div>
         <div class="slide-content">
             <div class="value-chain">
@@ -711,12 +776,12 @@
         </div>
     </div>
 
-    <!-- ===================== SLIDE 6: PRODUCCIÓN Y PROVEEDORES ===================== -->
-    <div class="slide" id="slide6">
+    <!-- ===================== SLIDE 8: PRODUCCIÓN Y PROVEEDORES ===================== -->
+    <div class="slide" id="slide8">
         <div class="slide-header">
             <h1>🐄 Producción y Proveedores</h1>
             <h2>Materia prima, ratios de producción e inventarios</h2>
-            <div class="slide-number">05</div>
+            <div class="slide-number">06</div>
         </div>
         <div class="slide-content">
             <h3 style="font-family:'Montserrat';color:var(--dark);">🥛 3 Proveedores de leche (según raza de vaca)</h3>
@@ -756,12 +821,12 @@
         </div>
     </div>
 
-    <!-- ===================== SLIDE 7: ÁREAS DE DECISIÓN ===================== -->
-    <div class="slide" id="slide7">
+    <!-- ===================== SLIDE 9: ÁREAS DE DECISIÓN ===================== -->
+    <div class="slide" id="slide9">
         <div class="slide-header">
             <h1>⚙️ Áreas de Decisión</h1>
             <h2>Las 6 áreas estratégicas que determinarán el éxito de la compañía</h2>
-            <div class="slide-number">06</div>
+            <div class="slide-number">07</div>
         </div>
         <div class="slide-content">
             <div class="card-grid">
@@ -802,12 +867,12 @@
         </div>
     </div>
 
-    <!-- ===================== SLIDE 8: SEGMENTOS Y COMPETITIVIDAD ===================== -->
-    <div class="slide" id="slide8">
+    <!-- ===================== SLIDE 10: SEGMENTOS ===================== -->
+    <div class="slide" id="slide10">
         <div class="slide-header">
-            <h1>🎯 Segmentos y Competitividad</h1>
-            <h2>3 segmentos de demanda × 3 canales × 4 factores competitivos</h2>
-            <div class="slide-number">07</div>
+            <h1>🎯 Segmentos</h1>
+            <h2>3 segmentos de demanda y 3 canales de distribución</h2>
+            <div class="slide-number">08</div>
         </div>
         <div class="slide-content">
             <div class="two-col">
@@ -825,204 +890,15 @@
                         <span class="seg-emoji">🥗</span>
                         <div><strong>Healthy</strong><br><small>Dieta, salud y calidad</small></div>
                     </div>
-                    <h3 style="font-family:'Montserrat';color:var(--dark);margin:22px 0 12px;">🏪 Canales de Distribución</h3>
+                </div>
+                <div>
+                    <h3 style="font-family:'Montserrat';color:var(--dark);margin-bottom:14px;">🏪 Canales de Distribución</h3>
                     <div style="line-height:1.4;">
                         <p style="margin-bottom:10px;">🏠 <strong>Tienda Tradicional</strong><br><span style="font-size:0.86em;color:#777;">Comercios de proximidad (tiendas de barrio y minimercados). Cercanía y trato cercano al cliente; compra frecuente y volúmenes pequeños.</span></p>
                         <p style="margin-bottom:10px;">🏬 <strong>Gran Superficie</strong><br><span style="font-size:0.86em;color:#777;">Supermercados e hipermercados con grandes espacios y amplia oferta. Mueven altos volúmenes, negocian fuerte el descuento y son muy sensibles al precio y la promoción.</span></p>
                         <p style="margin-bottom:0;">🍽️ <strong>Hostelería (HORECA)</strong><br><span style="font-size:0.86em;color:#777;">Hoteles, restaurantes, cafeterías, hospitales y colegios. Consumo fuera del hogar; valoran el servicio, la calidad y la regularidad en el suministro.</span></p>
                     </div>
                 </div>
-                <div>
-                    <h3 style="font-family:'Montserrat';color:var(--dark);margin-bottom:6px;">⚖️ Factores de Competitividad</h3>
-                    <p style="color:#777;font-size:0.9em;">Más puntos = mayor importancia para ese segmento. Haz clic para ver el detalle.</p>
-                    <div class="factor-accordion">
-                        <div class="factor-item">
-                            <div class="factor-header factor-orange" onclick="toggleFactor(this)">
-                                <span>💲 Precio</span>
-                                <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">Niños ●●●●●</span><span class="factor-icon">▼</span></span>
-                            </div>
-                            <div class="factor-body"><div class="factor-content">Niños/Jóvenes <strong>●●●●●</strong> · Adultos <strong>●●●●</strong> · Healthy <strong>●●●</strong>. El precio es el factor decisivo para el segmento más joven.</div></div>
-                        </div>
-                        <div class="factor-item">
-                            <div class="factor-header factor-amber" onclick="toggleFactor(this)">
-                                <span>🏷️ Marca</span>
-                                <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">Adultos ●●●●●</span><span class="factor-icon">▼</span></span>
-                            </div>
-                            <div class="factor-body"><div class="factor-content">Niños/Jóvenes <strong>●●●</strong> · Adultos <strong>●●●●●</strong> · Healthy <strong>●●●●</strong>. La marca pesa más en el público adulto.</div></div>
-                        </div>
-                        <div class="factor-item">
-                            <div class="factor-header factor-green" onclick="toggleFactor(this)">
-                                <span>🧪 Producto</span>
-                                <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">Healthy ●●●●●</span><span class="factor-icon">▼</span></span>
-                            </div>
-                            <div class="factor-body"><div class="factor-content">Niños/Jóvenes <strong>●●●●</strong> · Adultos <strong>●●●●</strong> · Healthy <strong>●●●●●</strong>. La calidad del producto es clave para el segmento Healthy.</div></div>
-                        </div>
-                        <div class="factor-item">
-                            <div class="factor-header factor-teal" onclick="toggleFactor(this)">
-                                <span>🚚 Cobertura</span>
-                                <span style="display:flex;align-items:center;gap:12px;"><span class="factor-tag">Niños ●●●●</span><span class="factor-icon">▼</span></span>
-                            </div>
-                            <div class="factor-body"><div class="factor-content">Niños/Jóvenes <strong>●●●●</strong> · Adultos <strong>●●●</strong> · Healthy <strong>●●●</strong>. Estar presente en el canal correcto impulsa las ventas.</div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================== SLIDE 9: CUADRO DE MANDO (GALERÍA) ===================== -->
-    <div class="slide" id="slide9">
-        <div class="slide-header">
-            <h1>📊 Cuadro de Mando</h1>
-            <h2>Así verás los resultados de tu empresa en el simulador</h2>
-            <div class="slide-number">08</div>
-        </div>
-        <div class="slide-content">
-            <p style="color:#555;line-height:1.7;">En el Cuadro de Mando encontrarás diversos informes para analizar tu gestión y la de la competencia. <strong>Haz clic en cualquier imagen para ampliarla.</strong></p>
-            <div class="cm-grid">
-
-                <div class="cm-card">
-                    <div class="cm-img"><img src="assets/cm-01.png" alt="Valor de la Compañía" loading="lazy" onclick="openLightbox('assets/cm-01.png','Valor de la Compañía')"></div>
-                    <div class="cm-body">
-                        <div class="cm-titlerow"><h3>📈 Valor de la Compañía</h3><span class="cm-badge">Principal</span></div>
-                        <div class="cm-desc">Comparativa del valor total de todas las compañías con evolución histórica y variación porcentual entre periodos.</div>
-                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
-                        <div class="cm-why-text">Es el indicador que <strong>define quién gana</strong>. Te dice si vas líder o rezagado y cuánto debes mejorar; marca la ambición de las decisiones del próximo periodo.</div>
-                    </div>
-                </div>
-
-                <div class="cm-card">
-                    <div class="cm-img"><img src="assets/cm-02.png" alt="Indicadores Clave" loading="lazy" onclick="openLightbox('assets/cm-02.png','Indicadores Clave de la Compañía')"></div>
-                    <div class="cm-body">
-                        <div class="cm-titlerow"><h3>🔑 Indicadores Clave</h3><span class="cm-badge">Análisis</span></div>
-                        <div class="cm-desc">Tabla completa con unidades vendidas, participación, ingresos, márgenes, resultados, endeudamiento, valor de marca y producto.</div>
-                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
-                        <div class="cm-why-text">Es la <strong>visión 360° del negocio</strong>. Cruzar participación, márgenes y endeudamiento revela dónde ganas o pierdes dinero realmente.</div>
-                    </div>
-                </div>
-
-                <div class="cm-card">
-                    <div class="cm-img"><img src="assets/cm-03.png" alt="Comparativa de Precios" loading="lazy" onclick="openLightbox('assets/cm-03.png','Comparativa de Precios')"></div>
-                    <div class="cm-body">
-                        <div class="cm-titlerow"><h3>💲 Comparativa de Precios</h3><span class="cm-badge">Marketing</span></div>
-                        <div class="cm-desc">Precio por litro/kilo de cada producto (leche, yogur, queso) frente a toda la competencia.</div>
-                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
-                        <div class="cm-why-text">El precio es <strong>decisivo para los segmentos sensibles</strong>. Comparar tu precio con el del mercado evita quedar fuera de rango.</div>
-                    </div>
-                </div>
-
-                <div class="cm-card">
-                    <div class="cm-img"><img src="assets/cm-04.png" alt="Análisis de Producción" loading="lazy" onclick="openLightbox('assets/cm-04.png','Análisis de Producción')"></div>
-                    <div class="cm-body">
-                        <div class="cm-titlerow"><h3>🏭 Análisis de Producción</h3><span class="cm-badge">Operaciones</span></div>
-                        <div class="cm-desc">Capacidad, unidades producidas, ocupación de fábrica, inventarios y costos por producto.</div>
-                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
-                        <div class="cm-why-text">Detecta <strong>cuellos de botella y exceso de inventario</strong> perecedero antes de planificar la producción siguiente.</div>
-                    </div>
-                </div>
-
-                <div class="cm-card">
-                    <div class="cm-img"><img src="assets/cm-05.png" alt="Participación de Mercado" loading="lazy" onclick="openLightbox('assets/cm-05.png','Participación de Mercado')"></div>
-                    <div class="cm-body">
-                        <div class="cm-titlerow"><h3>🌐 Participación de Mercado</h3><span class="cm-badge">Mercado</span></div>
-                        <div class="cm-desc">Cuota de mercado en unidades e ingresos, repartida entre todas las compañías.</div>
-                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
-                        <div class="cm-why-text">Muestra tu <strong>tamaño real frente a los rivales</strong> y si tu crecimiento viene del volumen o del precio.</div>
-                    </div>
-                </div>
-
-                <div class="cm-card">
-                    <div class="cm-img"><img src="assets/cm-06.png" alt="Análisis de Ventas" loading="lazy" onclick="openLightbox('assets/cm-06.png','Análisis de Ventas')"></div>
-                    <div class="cm-body">
-                        <div class="cm-titlerow"><h3>🛒 Análisis de Ventas</h3><span class="cm-badge">Ventas</span></div>
-                        <div class="cm-desc">Unidades vendidas por producto y por canal, con evolución y distribución porcentual.</div>
-                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
-                        <div class="cm-why-text">Revela <strong>qué producto y qué canal impulsan tus ventas</strong> para enfocar la promoción y la distribución.</div>
-                    </div>
-                </div>
-
-                <div class="cm-card">
-                    <div class="cm-img"><img src="assets/cm-07.png" alt="Análisis de Ingresos" loading="lazy" onclick="openLightbox('assets/cm-07.png','Análisis de Ingresos')"></div>
-                    <div class="cm-body">
-                        <div class="cm-titlerow"><h3>💰 Análisis de Ingresos</h3><span class="cm-badge">Finanzas</span></div>
-                        <div class="cm-desc">Ingresos por producto, evolución y distribución porcentual de la facturación.</div>
-                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
-                        <div class="cm-why-text">Identifica <strong>de dónde viene el dinero</strong> y qué línea conviene potenciar o ajustar en precio.</div>
-                    </div>
-                </div>
-
-                <div class="cm-card">
-                    <div class="cm-img"><img src="assets/cm-08.png" alt="Análisis de Margen" loading="lazy" onclick="openLightbox('assets/cm-08.png','Análisis de Margen')"></div>
-                    <div class="cm-body">
-                        <div class="cm-titlerow"><h3>📊 Análisis de Margen</h3><span class="cm-badge">Rentabilidad</span></div>
-                        <div class="cm-desc">Margen sobre ingresos por producto, su evolución y la distribución del margen total.</div>
-                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
-                        <div class="cm-why-text">Vender mucho no basta: <strong>el margen dice qué producto realmente aporta beneficio</strong>.</div>
-                    </div>
-                </div>
-
-                <div class="cm-card">
-                    <div class="cm-img"><img src="assets/cm-09.png" alt="Cuenta de Resultados y Balance" loading="lazy" onclick="openLightbox('assets/cm-09.png','Cuenta de Resultados y Balance')"></div>
-                    <div class="cm-body">
-                        <div class="cm-titlerow"><h3>🧾 Cuenta de Resultados y Balance</h3><span class="cm-badge">Contabilidad</span></div>
-                        <div class="cm-desc">Estado de resultados completo y balance de la compañía, con variación entre periodos.</div>
-                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
-                        <div class="cm-why-text">Es la <strong>radiografía financiera</strong>: controla gastos, resultado neto, deuda y patrimonio para asegurar la solvencia.</div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- ===================== SLIDE 10: DECISIONES DEL SIMULADOR (GALERÍA) ===================== -->
-    <div class="slide" id="slide10">
-        <div class="slide-header">
-            <h1>🕹️ Las Decisiones del Simulador</h1>
-            <h2>Las pantallas donde introduces tus decisiones cada periodo</h2>
-            <div class="slide-number">09</div>
-        </div>
-        <div class="slide-content">
-            <p style="color:#555;line-height:1.7;">Cada periodo tomas decisiones en 5 áreas. Estas son las pantallas reales del simulador. <strong>Haz clic en cualquier imagen para verla en detalle.</strong></p>
-
-            <div class="dec-block">
-                <div class="dec-head">
-                    <span class="dec-num">1</span>
-                    <div><h3>💲 Precio y Ventas</h3><p>Fija el precio de cada producto (leche, yogur, queso), el descuento por canal y el gasto en promoción en el punto de venta.</p></div>
-                </div>
-                <div class="dec-shot"><img src="assets/dec-01.png" alt="Decisiones de Precio y Ventas" loading="lazy" onclick="openLightbox('assets/dec-01.png','Precio y Ventas')"></div>
-            </div>
-
-            <div class="dec-block">
-                <div class="dec-head">
-                    <span class="dec-num">2</span>
-                    <div><h3>🏷️ Promoción y Marca</h3><p>Prioriza los segmentos de demanda (suma máxima de 21 puntos) y asigna el presupuesto de promoción de marca por producto.</p></div>
-                </div>
-                <div class="dec-shot"><img src="assets/dec-promo.png" alt="Decisiones de Promoción y Marca" loading="lazy" onclick="openLightbox('assets/dec-promo.png','Promoción y Marca')"></div>
-            </div>
-
-            <div class="dec-block">
-                <div class="dec-head">
-                    <span class="dec-num">3</span>
-                    <div><h3>🧪 Producto</h3><p>Decide el gasto en mejora de calidad, la amplitud de gama, el nivel de packaging y el proveedor de materia prima.</p></div>
-                </div>
-                <div class="dec-shot"><img src="assets/dec-producto.png" alt="Decisiones de Producto" loading="lazy" onclick="openLightbox('assets/dec-producto.png','Producto')"></div>
-            </div>
-
-            <div class="dec-block">
-                <div class="dec-head">
-                    <span class="dec-num">4</span>
-                    <div><h3>🏭 Producción</h3><p>Planifica las unidades a fabricar, la ampliación de capacidad, el gasto de mantenimiento y la modalidad logística.</p></div>
-                </div>
-                <div class="dec-shot"><img src="assets/dec-produccion.png" alt="Decisiones de Producción" loading="lazy" onclick="openLightbox('assets/dec-produccion.png','Producción')"></div>
-            </div>
-
-            <div class="dec-block">
-                <div class="dec-head">
-                    <span class="dec-num">5</span>
-                    <div><h3>🏦 Financiación</h3><p>Solicita préstamos a largo y corto plazo según las necesidades de caja de tu empresa.</p></div>
-                </div>
-                <div class="dec-shot"><img src="assets/dec-financiacion.png" alt="Decisiones de Financiación" loading="lazy" onclick="openLightbox('assets/dec-financiacion.png','Financiación')"></div>
             </div>
         </div>
     </div>
@@ -1032,7 +908,7 @@
         <div class="slide-header">
             <h1>🏆 Valor de la Compañía</h1>
             <h2>La métrica principal de evaluación — objetivo: crecer al menos 7% cada periodo</h2>
-            <div class="slide-number">10</div>
+            <div class="slide-number">09</div>
         </div>
         <div class="slide-content">
             <p style="color:#555;line-height:1.7;">El <strong>Valor de la Compañía</strong> resume el <strong>desempeño integral</strong> del negocio a corto, medio y largo plazo. Se compone de <strong>7 factores ponderados</strong>. Haz clic en cada factor para ver su detalle:</p>
@@ -1119,12 +995,204 @@
         </div>
     </div>
 
-    <!-- ===================== SLIDE 12: MÉTODOS DE IMPLEMENTACIÓN ===================== -->
+    <!-- ===================== SLIDE 12: DIVISORIA — CUADRO DE MANDO ===================== -->
     <div class="slide" id="slide12">
+        <div class="section-divider">
+            <div class="sd-icon">📊</div>
+            <div class="sd-eyebrow">Sección</div>
+            <h1>Cuadro de Mando</h1>
+            <p>Así verás los resultados de tu empresa en el simulador</p>
+            <div class="sd-rule"></div>
+        </div>
+    </div>
+
+    <!-- ===================== SLIDE 13: CUADRO DE MANDO (GALERÍA) ===================== -->
+    <div class="slide" id="slide13">
+        <div class="slide-header">
+            <h1>📊 Cuadro de Mando</h1>
+            <h2>Así verás los resultados de tu empresa en el simulador</h2>
+            <div class="slide-number">10</div>
+        </div>
+        <div class="slide-content">
+            <p style="color:#555;line-height:1.7;">En el Cuadro de Mando encontrarás diversos informes para analizar tu gestión y la de la competencia. <strong>Haz clic en cualquier imagen para ampliarla.</strong></p>
+            <div class="cm-grid">
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-valor.jpg" alt="Valor de la Compañía" loading="lazy" onclick="openLightbox('assets/cm-valor.jpg','Valor de la Compañía')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>📈 Valor de la Compañía</h3><span class="cm-badge">Principal</span></div>
+                        <div class="cm-desc">Comparativa del valor total de todas las compañías con evolución histórica y variación porcentual entre periodos.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Es el indicador que <strong>define quién gana</strong>. Te dice si vas líder o rezagado y cuánto debes mejorar; marca la ambición de las decisiones del próximo periodo.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-indicadores.jpg" alt="Indicadores Clave" loading="lazy" onclick="openLightbox('assets/cm-indicadores.jpg','Indicadores Clave de la Compañía')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🔑 Indicadores Clave</h3><span class="cm-badge">Análisis</span></div>
+                        <div class="cm-desc">Tabla completa con unidades vendidas, participación, ingresos, márgenes, resultados, endeudamiento, valor de marca y producto.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Es la <strong>visión 360° del negocio</strong>. Cruzar participación, márgenes y endeudamiento revela dónde ganas o pierdes dinero realmente.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-precios.jpg" alt="Comparativa de Precios" loading="lazy" onclick="openLightbox('assets/cm-precios.jpg','Comparativa de Precios')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>💲 Comparativa de Precios</h3><span class="cm-badge">Marketing</span></div>
+                        <div class="cm-desc">Precio por litro/kilo de cada producto (leche, yogur, queso) frente a toda la competencia.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">El precio es <strong>decisivo para los segmentos sensibles</strong>. Comparar tu precio con el del mercado evita quedar fuera de rango.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-produccion.jpg" alt="Análisis de Producción" loading="lazy" onclick="openLightbox('assets/cm-produccion.jpg','Análisis de Producción')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🏭 Análisis de Producción</h3><span class="cm-badge">Operaciones</span></div>
+                        <div class="cm-desc">Capacidad, unidades producidas, ocupación de fábrica, inventarios y costos por producto.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Detecta <strong>cuellos de botella y exceso de inventario</strong> perecedero antes de planificar la producción siguiente.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-participacion.jpg" alt="Participación de Mercado" loading="lazy" onclick="openLightbox('assets/cm-participacion.jpg','Participación de Mercado')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🌐 Participación de Mercado</h3><span class="cm-badge">Mercado</span></div>
+                        <div class="cm-desc">Cuota de mercado en unidades e ingresos, repartida entre todas las compañías.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Muestra tu <strong>tamaño real frente a los rivales</strong> y si tu crecimiento viene del volumen o del precio.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-ventas.jpg" alt="Análisis de Ventas" loading="lazy" onclick="openLightbox('assets/cm-ventas.jpg','Análisis de Ventas')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🛒 Análisis de Ventas</h3><span class="cm-badge">Ventas</span></div>
+                        <div class="cm-desc">Unidades vendidas por producto y por canal, con evolución y distribución porcentual.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Revela <strong>qué producto y qué canal impulsan tus ventas</strong> para enfocar la promoción y la distribución.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-ingresos.jpg" alt="Análisis de Ingresos" loading="lazy" onclick="openLightbox('assets/cm-ingresos.jpg','Análisis de Ingresos')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>💰 Análisis de Ingresos</h3><span class="cm-badge">Finanzas</span></div>
+                        <div class="cm-desc">Ingresos por producto, evolución y distribución porcentual de la facturación.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Identifica <strong>de dónde viene el dinero</strong> y qué línea conviene potenciar o ajustar en precio.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-margen.jpg" alt="Análisis de Margen" loading="lazy" onclick="openLightbox('assets/cm-margen.jpg','Análisis de Margen')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>📊 Análisis de Margen</h3><span class="cm-badge">Rentabilidad</span></div>
+                        <div class="cm-desc">Margen sobre ingresos por producto, su evolución y la distribución del margen total.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Vender mucho no basta: <strong>el margen dice qué producto realmente aporta beneficio</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/cm-resultados.jpg" alt="Cuenta de Resultados y Balance" loading="lazy" onclick="openLightbox('assets/cm-resultados.jpg','Cuenta de Resultados y Balance')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🧾 Cuenta de Resultados y Balance</h3><span class="cm-badge">Contabilidad</span></div>
+                        <div class="cm-desc">Estado de resultados completo y balance de la compañía, con variación entre periodos.</div>
+                        <span class="cm-why-label">🔍 Por qué analizarlo</span>
+                        <div class="cm-why-text">Es la <strong>radiografía financiera</strong>: controla gastos, resultado neto, deuda y patrimonio para asegurar la solvencia.</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== SLIDE 14: DIVISORIA — DECISIONES DEL SIMULADOR ===================== -->
+    <div class="slide" id="slide14">
+        <div class="section-divider">
+            <div class="sd-icon">🕹️</div>
+            <div class="sd-eyebrow">Sección</div>
+            <h1>Las Decisiones del Simulador</h1>
+            <p>Las pantallas donde introduces tus decisiones cada periodo</p>
+            <div class="sd-rule"></div>
+        </div>
+    </div>
+
+    <!-- ===================== SLIDE 15: DECISIONES DEL SIMULADOR ===================== -->
+    <div class="slide" id="slide15">
+        <div class="slide-header">
+            <h1>🕹️ Las Decisiones del Simulador</h1>
+            <h2>Las pantallas donde introduces tus decisiones cada periodo</h2>
+            <div class="slide-number">11</div>
+        </div>
+        <div class="slide-content">
+            <p style="color:#555;line-height:1.7;">Cada periodo tomas decisiones en 5 áreas. Estas son las pantallas reales del simulador. <strong>Haz clic en cualquier imagen para verla en detalle.</strong></p>
+            <div class="cm-grid">
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/dec-ventas.jpg" alt="Decisiones de Precio y Ventas" loading="lazy" onclick="openLightbox('assets/dec-ventas.jpg','Precio y Ventas')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>💲&nbsp;1&nbsp;·&nbsp;Precio y Ventas</h3><span class="cm-badge">Marketing</span></div>
+                        <div class="cm-desc">Fija el precio de cada producto (leche, yogur, queso), el descuento por canal y el gasto en promoción en el punto de venta.</div>
+                        <span class="cm-why-label">💡 Por qué importa</span>
+                        <div class="cm-why-text">El precio es el factor que más pesa en la compra de muchos consumidores y define tu <strong>margen por unidad</strong>: un precio mal calibrado frena las ventas o destruye la rentabilidad.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/dec-promocion.jpg" alt="Decisiones de Promoción y Marca" loading="lazy" onclick="openLightbox('assets/dec-promocion.jpg','Promoción y Marca')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🏷️&nbsp;2&nbsp;·&nbsp;Promoción y Marca</h3><span class="cm-badge">Marca</span></div>
+                        <div class="cm-desc">Prioriza los segmentos de demanda (suma máxima de 21 puntos) y asigna el presupuesto de promoción de marca por producto.</div>
+                        <span class="cm-why-label">💡 Por qué importa</span>
+                        <div class="cm-why-text">La inversión en marca construye el <strong>Valor de Marca</strong> (12% del Valor de la Compañía) y orienta tu esfuerzo comercial hacia los segmentos donde quieres competir.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/dec-producto.jpg" alt="Decisiones de Producto" loading="lazy" onclick="openLightbox('assets/dec-producto.jpg','Producto')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🧪&nbsp;3&nbsp;·&nbsp;Producto</h3><span class="cm-badge">Producto</span></div>
+                        <div class="cm-desc">Decide el gasto en mejora de calidad, la amplitud de gama, el nivel de packaging y el proveedor de materia prima.</div>
+                        <span class="cm-why-label">💡 Por qué importa</span>
+                        <div class="cm-why-text">Calidad, gama y packaging elevan el <strong>Valor de Producto</strong> (12% del Valor de la Compañía), pero también tus costos: el equilibrio define tu posicionamiento.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/dec-produccion.jpg" alt="Decisiones de Producción" loading="lazy" onclick="openLightbox('assets/dec-produccion.jpg','Producción')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🏭&nbsp;4&nbsp;·&nbsp;Producción</h3><span class="cm-badge">Operaciones</span></div>
+                        <div class="cm-desc">Planifica las unidades a fabricar, la ampliación de capacidad, el gasto de mantenimiento y la modalidad logística.</div>
+                        <span class="cm-why-label">💡 Por qué importa</span>
+                        <div class="cm-why-text">Producir de más genera inventario perecedero que caduca; producir de menos deja ventas sin atender. Además impacta la <strong>eficiencia productiva</strong> y la <strong>cobertura de distribución</strong>.</div>
+                    </div>
+                </div>
+
+                <div class="cm-card">
+                    <div class="cm-img"><img src="assets/dec-financiacion.jpg" alt="Decisiones de Financiación" loading="lazy" onclick="openLightbox('assets/dec-financiacion.jpg','Financiación')"></div>
+                    <div class="cm-body">
+                        <div class="cm-titlerow"><h3>🏦&nbsp;5&nbsp;·&nbsp;Financiación</h3><span class="cm-badge">Finanzas</span></div>
+                        <div class="cm-desc">Solicita préstamos a largo y corto plazo según las necesidades de caja de tu empresa.</div>
+                        <span class="cm-why-label">💡 Por qué importa</span>
+                        <div class="cm-why-text">La financiación sostiene tus inversiones, pero los intereses reducen el resultado y el endeudamiento afecta la <strong>rentabilidad y solvencia</strong> que evalúa el ranking.</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== SLIDE 16: MÉTODOS DE IMPLEMENTACIÓN ===================== -->
+    <div class="slide" id="slide16">
         <div class="slide-header">
             <h1>📚 Métodos de Implementación</h1>
             <h2>Cuatro formas de integrar el simulador en tu programa académico</h2>
-            <div class="slide-number">11</div>
+            <div class="slide-number">12</div>
         </div>
         <div class="slide-content">
 
@@ -1293,12 +1361,12 @@
         </div>
     </div>
 
-    <!-- ===================== SLIDE 13: FAQ ===================== -->
-    <div class="slide" id="slide13">
+    <!-- ===================== SLIDE 17: FAQ ===================== -->
+    <div class="slide" id="slide17">
         <div class="slide-header">
             <h1>❓ Preguntas Frecuentes</h1>
             <h2>Las dudas más comunes antes de iniciar la simulación</h2>
-            <div class="slide-number">12</div>
+            <div class="slide-number">13</div>
         </div>
         <div class="slide-content">
             <div class="accordion">
@@ -1334,14 +1402,25 @@
         </div>
     </div>
 
-    <!-- ===================== SLIDE 14: CIERRE ===================== -->
-    <div class="slide" id="slide14">
+    <!-- ===================== SLIDE 18: CIERRE ===================== -->
+    <div class="slide" id="slide18">
         <div class="closing">
             <h1>¡Gracias!</h1>
             <p class="thanks-sub">Gracias por participar en FoodCompany</p>
             <div class="contact-box">
                 <div class="contact-line">📧 <a href="mailto:fidelizacion@simuladoresdenegocios.co">fidelizacion@simuladoresdenegocios.co</a></div>
                 <div class="contact-line"><svg class="wa-icon" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg> <a href="https://wa.me/573017903086">301 790 3086</a></div>
+            </div>
+            <div class="social-row">
+                <a class="social-icon" href="https://co.linkedin.com/company/simuladores-de-negocios-colombia-sas" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-338.7C24.09 109.3 0 85.18 0 55.7A53.79 53.79 0 0 1 53.79 1.9c29.7 0 53.8 24.09 53.8 53.8 0 29.48-24.1 53.6-53.75 53.6zM447.9 448h-92.68V302.4c0-34.7-.7-79.4-48.4-79.4-48.4 0-55.8 37.8-55.8 76.9V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/></svg>
+                </a>
+                <a class="social-icon" href="https://www.youtube.com/@SimuladoresdeNegocios/videos" target="_blank" rel="noopener" aria-label="YouTube">
+                    <svg viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.1 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232 335.1V177l143.7 79.1L232 335.1z"/></svg>
+                </a>
+                <a class="social-icon" href="https://simuladordenegocios.co/" target="_blank" rel="noopener" aria-label="Página web">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </a>
             </div>
             <div class="sdn-img-box" id="sdn-box">
                 <img class="sdn-img" src="assets/logo-sdn.png" alt="Simuladores de Negocios Colombia"
@@ -1371,7 +1450,7 @@
 <!-- ===================== NAV BAR ===================== -->
 <div class="nav-bar">
     <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>◀ Anterior</button>
-    <div class="slide-counter" id="slideCounter">1 / 14</div>
+    <div class="slide-counter" id="slideCounter">1 / 18</div>
     <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Siguiente ▶</button>
 </div>
 
